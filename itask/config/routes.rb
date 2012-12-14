@@ -1,4 +1,5 @@
-Itask::Application.routes.draw do
+Itask::Application.routes.draw do  
+  root :to => "course_years#index"
   match 'login', :to => 'account#login', :as => 'signin' 
   match 'account/register', :to => 'account#register', :via => [:get, :post], :as => 'register'
   # The priority is based upon order of creation:
@@ -17,7 +18,7 @@ Itask::Application.routes.draw do
   resources :course_years do
      resources :assignments
   end
-
+   resources :assignments  
   # Sample resource route with options:
   #   resources :products do
   #     member do
