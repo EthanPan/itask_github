@@ -1,0 +1,15 @@
+<html>
+<h1> Course List </h1>
+<table>
+	<tr> 
+		<th> Name </th>
+	</tr>
+	
+	<% @course_year.each do |c| %>
+	<tr>
+		<td><%= c.course.name %></td>
+	</tr>
+	<% end %>
+</table>
+</html>
+	

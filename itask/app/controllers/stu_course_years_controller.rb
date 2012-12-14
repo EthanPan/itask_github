@@ -1,0 +1,2 @@
+class StuCourseYearsController < ApplicationController
+end

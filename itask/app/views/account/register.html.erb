@@ -1,0 +1,22 @@
+<%= form_for @student, :url => signin_path do |form|%>
+	<fieldset>
+		<legend>注册</legend>   
+		<label >学号:</label>
+		<%= form.text_field :stu_id %>
+		
+		<br/>
+		<label> 密码:</label>
+		<%= form.password_field :password%>
+		<br/> 
+		<label >姓名:</label>
+		<%= form.text_field :name %>
+        <br/>
+		<label >邮箱:</label>
+	    <%= form.text_field :email %>
+
+		<br/> 
+		
+		<%= submit_tag "登录", :class => "submit",class:"btn" %> 
+	   
+	</fieldset>
+<% end %>
