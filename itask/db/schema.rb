@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20121213120235) do
 
   create_table "courses", :force => true do |t|
     t.string   "course_id"
-    t.string   "teach_id"
+    t.string   "teacher_id"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
