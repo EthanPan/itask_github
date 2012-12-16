@@ -6,7 +6,17 @@ class AssignmentsController < ApplicationController
 		@courseyear = CourseYear.find(params[:id])
 		@assignments = @courseyear.assignments
 	end 
+
 	def show
-	  @assignment = Assignment.find(params[:id])
+	    @assignment = Assignment.find(params[:id])
+	end
+
+	def new
+		@assignment = Assignment.new		
+	end
+
+	def create
+		@assignment = Assignment.new(params[:assignment])
+		@assignment.save
 	end
 end

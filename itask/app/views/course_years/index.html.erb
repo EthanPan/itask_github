@@ -14,7 +14,7 @@
 		<td><%= c.course.course_id %></td>
 		<td><%= c.course.name %></td>
 		<td><%= c.course.teacher.name %></td>
-		<td><%= link_to "View" , course_year_assignments_path(1) %></td>
+		<td><%= link_to "View" , course_year_assignments_path(c) %></td>
 	</tr>
 	<% end %>  
 	</tbody>
