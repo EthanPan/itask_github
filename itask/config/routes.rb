@@ -1,8 +1,12 @@
 Itask::Application.routes.draw do  
+  ActiveAdmin.routes(self)
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+
   root :to => "course_years#index"
   match 'login', :to => 'account#login', :as => 'signin' 
   match 'account/register', :to => 'account#register', :via => [:get, :post], :as => 'register'
-  match 'manage/course', :to => 'manage#index'
+  match 'manage', :to => 'manage#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

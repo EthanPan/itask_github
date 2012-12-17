@@ -2,7 +2,7 @@
 <% if flash[:notice] -%>
   <div id="notice"><%= flash[:notice] %></div>
 <% end -%>
-<%= form_for @assignment do |f| %>
+<%= form_for @assignment ,:url => course_year_assignments_path do |f| %>
 
   <div class="field">
     <%= f.label :作业标题 %><br />

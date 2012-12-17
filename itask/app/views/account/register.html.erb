@@ -1,8 +1,8 @@
-<%= form_for @student, :url => signin_path do |form|%>
+<%= form_for @user, :url => register_path do |form|%>
 	<fieldset>
 		<legend>注册</legend>   
 		<label >学号:</label>
-		<%= form.text_field :stu_id %>
+		<%= form.text_field :user_num %>
 		
 		<br/>
 		<label> 密码:</label>
@@ -16,7 +16,7 @@
 
 		<br/> 
 		
-		<%= submit_tag "登录", :class => "submit",class:"btn" %> 
+		<%= submit_tag "注册", :class => "submit",class:"btn" %> 
 	   
 	</fieldset>
 <% end %>

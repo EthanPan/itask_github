@@ -1,5 +1,5 @@
-class StuCourseYear < ActiveRecord::Base
+class UserCourseYear < ActiveRecord::Base
   # attr_accessible :title, :body
-  belongs_to :student
+  belongs_to :user
   belongs_to :course_year
 end

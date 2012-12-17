@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  attr_accessible :course_id, :teacher_id, :name 
-  belongs_to :teacher 
+  attr_accessible :course_num, :user_id, :name 
+  belongs_to :user 
   has_many   :course_years
 end

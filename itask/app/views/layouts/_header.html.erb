@@ -11,9 +11,13 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="#">动态</a></li>
-              <li><a href="#about">课程</a></li>
+              <li><%= link_to "课程", course_years_path%></li>
               <li><a href="#contact">我的作业</a></li>
-              <li><a href="#manage">管理</a></li>
+              <% if !@current_user.blank? %>
+               <% if @current_user.role <= 2 %>
+              <li><%= link_to "管理", manage_path%></li>
+              <% end %>
+              <% end %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -28,9 +32,17 @@
               </li>
             </ul>
             <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
+             
+               <ul class="nav">
+                 <% if @current_user.blank? %>
+                    <li><%= link_to "登录", signin_path%></li>
+                <%else%>
+                    <li><%= link_to "注销", signin_path%></li>
+                <%end%>
+              </ul>
+             <!--  <input class="span2" type="text" placeholder="学号/工号">
+              <input class="span2" type="password" placeholder="密码">
+              <button type="submit" class="btn">登录</button> -->
             </form>
           </div><!--/.nav-collapse -->
         </div>

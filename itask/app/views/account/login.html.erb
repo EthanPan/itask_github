@@ -1,13 +1,14 @@
        
-<%= form_for :student, :url => signin_path do |form|%>
+<%= form_for :user, :url => signin_path do |form|%>
 	<fieldset>
 		<legend>登录</legend>   
-		<label >学号:</label>
-		<%= form.text_field :stu_id %>
-		
+		<label >学号/工号:</label>
+		<%= form.text_field :user_num %>
+		              
+
 		<br/>
 		<label> 密码:</label>
-		<%= form.password_field :password%>
+		<%= form.password_field :password %>
 		<br/>
 		<%= submit_tag "登录", :class => "submit" ,class:"btn"%>  
 		<%= link_to "注册",register_path,class:"btn" %>  
