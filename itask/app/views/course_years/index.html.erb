@@ -3,6 +3,7 @@
 <table class="table table-hover table-striped">
 	  <thead>  
 	<tr>
+		<th> 学年 学期 </th> 
 		<th> 课程序号 </th> 
 		<th> 课程名称 </th>
 		<th> 任课教师 </th>
@@ -11,7 +12,8 @@
 	<tbody>
 	<% @course_years.each do |c| %>
 	<tr>
-		<td><%= c.course.course_id %></td>
+		<td><%= c.year %> <%= c.semester %></td>
+		<td><%= c.course.course_num %></td>
 		<td><%= c.course.name %></td>
 		<td><%= c.course.user.name %></td>
 		<td><%= link_to "View" , course_year_assignments_path(c) %></td>
