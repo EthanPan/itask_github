@@ -1,0 +1,26 @@
+<h1>New assignment</h1>
+<% if flash[:notice] -%>
+  <div id="notice"><%= flash[:notice] %></div>
+<% end -%>
+<%= form_for @assignment do |f| %>
+
+  <div class="field">
+    <%= f.label :作业标题 %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :作业描述 %><br />
+    <%= f.text_field :desp %>
+  </div>
+  <div class="field">
+    <%= f.label :开放时间 %><br />
+    <%= f.text_field :open_time %>
+  </div>
+  <div class="field">
+    <%= f.label :截止时间 %><br />
+    <%= f.text_field :end_time %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create"%>
+  </div>
+<% end %>

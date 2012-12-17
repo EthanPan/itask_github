@@ -2,6 +2,7 @@ Itask::Application.routes.draw do
   root :to => "course_years#index"
   match 'login', :to => 'account#login', :as => 'signin' 
   match 'account/register', :to => 'account#register', :via => [:get, :post], :as => 'register'
+  match 'manage/course', :to => 'manage#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -15,10 +16,10 @@ Itask::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  resources :assignments
   resources :course_years do
      resources :assignments
   end
+  resources :assignments
   # Sample resource route with options:
   #   resources :products do
   #     member do
