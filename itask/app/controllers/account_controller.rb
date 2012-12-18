@@ -9,7 +9,7 @@ class AccountController < ApplicationController
          user = User.try_to_login(params[:user][:user_num],params[:user][:password])
          if user  
              flash[:success] = "login successfully!" 
-                          session[:user_num] = params[:user][:user_num] 
+             session[:user_num] = params[:user][:user_num] 
   
          else
             flash[:alert] = "the stu_id or password is wrong"
@@ -17,6 +17,11 @@ class AccountController < ApplicationController
          
     end
      
+  end
+
+  def logout
+    logout_user
+    redirect_to course_years_path
   end
   def register
     if request.post?

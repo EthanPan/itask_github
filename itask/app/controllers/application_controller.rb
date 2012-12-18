@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
 
   def is_manager
   end
+
+  def logout_user
+  	session[:user_num] = nil
+  end
   def find_current_user
   	@current_user = nil
   	if session[:user_num]

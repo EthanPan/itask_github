@@ -37,7 +37,8 @@
                  <% if @current_user.blank? %>
                     <li><%= link_to "登录", signin_path%></li>
                 <%else%>
-                    <li><%= link_to "注销", signin_path%></li>
+                    <li><%= image_tag @current_user.gravatar_url(:rating => 'R', :secure => true,:size=>30) %>  </li>
+                    <li><%= link_to "注销", signout_path%></li>
                 <%end%>
               </ul>
              <!--  <input class="span2" type="text" placeholder="学号/工号">

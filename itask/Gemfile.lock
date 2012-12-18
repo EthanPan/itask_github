@@ -69,6 +69,7 @@ GEM
     fastercsv (1.5.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    gravtastic (3.2.6)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.1)
@@ -160,6 +161,7 @@ DEPENDENCIES
   activeadmin
   bootstrap-sass (~> 2.2.1.1)
   coffee-rails (~> 3.2.1)
+  gravtastic
   jquery-rails
   meta_search (>= 1.1.0.pre)
   paperclip (~> 3.0)

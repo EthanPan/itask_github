@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  
+  include Gravtastic
+  gravtastic
   attr_accessible :user_num, :name, :sex ,:password,:email,:role
   has_many   :user_course_years
   has_many   :courses
