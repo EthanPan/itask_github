@@ -1,0 +1,17 @@
+<p>please grade<p>
+<%= form_for @sca, :url => grade_assignment_student_course_assignment_path(@assignment,@sca) do |f| %>
+
+  <div class="field">
+    <%= f.label :score %>
+    <%= f.text_field :score %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit "OK!"%>
+  </div>
+<% end %>
