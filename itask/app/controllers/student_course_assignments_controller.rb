@@ -16,4 +16,27 @@ class StudentCourseAssignmentsController < ApplicationController
 		end
 
 	end
+
+	
+	def grade
+	if request.put?
+	     @sca = StudentCourseAssignment.update(params[:id],:score=>params[:student_course_assignment][:score],:comment=>params[:student_course_assignment][:comment])
+		 
+		 @assignment = Assignment.find(params[:assignment_id])
+		 if @sca.save
+			flash[:alert] = "successfully"
+			redirect_to assignment_path(@assignment)
+		 else
+		     flash[:alert] = "fail!"
+			 redirect_to course_years_path
+		 end
+
+	   
+		
+	else
+		 @sca = StudentCourseAssignment.find(params[:id])
+		 @assignment = Assignment.find(params[:assignment_id])
+		 end
+	end
+		
 end

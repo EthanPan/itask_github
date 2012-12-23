@@ -5,6 +5,10 @@ class AssignmentsController < ApplicationController
 		#@courseyear = CourseYear.find(params[:course_year_id])
 		@assignments = @courseyear.assignments
 	end
+	
+	def edit
+	end
+	
 	def show_by_course
 		@courseyear = CourseYear.find(params[:id])
 		@assignments = @courseyear.assignments
