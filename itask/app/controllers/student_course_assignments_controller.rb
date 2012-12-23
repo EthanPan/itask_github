@@ -1,4 +1,8 @@
 class StudentCourseAssignmentsController < ApplicationController
+	
+    def index
+    	@sca = StudentCourseAssignment.all
+    end
 	def new
 		@sca = StudentCourseAssignment.new
 	end

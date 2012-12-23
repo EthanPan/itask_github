@@ -11,6 +11,13 @@ class AssignmentsController < ApplicationController
 	end 
 
 	def show
+
+    respond_to do |format|
+        format.html {
+        @sca = StudentCourseAssignment.new # for adding news inline
+        
+        }
+    end
 	    @assignment = Assignment.find(params[:id])
 	end
 

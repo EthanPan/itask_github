@@ -1,0 +1,58 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  errors:
+    messages:
+      expired: "页面过期，请刷新"
+      not_found: "无法找到"
+      already_confirmed: "已验证，请登录"
+      not_locked: "未被锁定"
+      not_saved:
+        one: "有 1 个错误发生导致「%{model}」无法被保存:"
+        other: "有 %{count} 个错误发生导致「%{model}」无法被保存:"
+
+  devise:
+    failure:
+      already_authenticated: '您已登录.'
+      unauthenticated: '请登录或注册后再继续操作.'
+      unconfirmed: '请确认您的账号后再继续操作.'
+      locked: '您的账号已被锁定.'
+      invalid: '邮箱或密码错误.'
+      invalid_token: '验证信息错误.'
+      timeout: '登录时间过长,请重新登录后再继续操作.'
+      inactive: '您的账号还未激活.'
+    sessions:
+      signed_in: '登录成功.'
+      signed_out: '退出成功.'
+    passwords:
+      send_instructions: '您会在几分钟内收到关于如何重置密码的邮件.'
+      updated: '密码修改成功. 请登录.'
+      updated_not_active: '密码修改成功.'
+      send_paranoid_instructions: "如果您的邮箱已存在, 您会在几分钟内收到包含重置密码链接的邮件."
+      no_token: "不通过密码重置邮件，您无法访问该页面. 如果您通过密码重置邮件, 请确认您使用了完整的链接."
+    confirmations:
+      send_instructions: '您会在几分钟内收到关于如何确认账号的邮件.'
+      send_paranoid_instructions: '如果您的邮箱已存在, 您会在几分钟内收到包含如何验证账号的邮件.'
+      confirmed: '账号确认成功，请登录.'
+    registrations:
+      signed_up: '恭喜！您已注册成功.'
+      signed_up_but_unconfirmed: '一个包含确认链接的邮件已发送到您的邮箱. 请点击链接激活您的账号.'
+      signed_up_but_inactive: '您已注册成功. 但是您的账号未激活暂时无法登录.'
+      signed_up_but_locked: '您已注册成功. 但是您的账号被锁定暂时无法登录.'
+      updated: '账号更新成功.'
+      update_needs_confirmation: "账号更新成功, 但我们需要验证您的新邮箱. 请查看您的邮箱并点击链接完成对您新邮箱的验证."
+      destroyed: '账号注销成功，欢迎下次继续使用.'
+    unlocks:
+      send_instructions: '您会在几分钟内收到关于如何解锁账号的邮件.'
+      unlocked: '账号解锁成功，请登录.'
+      send_paranoid_instructions: '如果您的账号已存在, 您会在几分钟内收到一份关于如何解锁账号的邮件.'
+    omniauth_callbacks:
+      success: '成功通过%{kind}账号完成对您的验证.'
+      failure: '无法通过%{kind}完成对您的验证，因为"%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: '确认指令'
+      reset_password_instructions:
+        subject: '重置密码指令'
+      unlock_instructions:
+        subject: '解锁指令'

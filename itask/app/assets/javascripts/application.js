@@ -13,3 +13,10 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+function showAndScrollTo(id, focus) {
+  $('#'+id).show();
+  if (focus!=null) {
+    $('#'+focus).focus();
+  }
+  $('html, body').animate({scrollTop: $('#'+id).offset().top}, 100);
+}

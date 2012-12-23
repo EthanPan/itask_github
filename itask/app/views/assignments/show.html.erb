@@ -1,30 +1,23 @@
+
+<div class="contextual">
+<%= link_to("上传作业",
+            new_assignment_student_course_assignment_path(@assignment), 
+            :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment %>
+</div>
+
+<div id="add-studnet-assignment" style="display:none;">
+<h2><%= "上传作业"%></h2>
+<%= form_for @sca, :url => assignment_student_course_assignments_path(@assignment),
+                                           :html => { :id => 'student-assignment-form', :multipart => true } do |f| %>
+<%= render :partial => 'student_course_assignments/form', :locals => { :f => f ,
+	:attachment => @sca.attachment } %>
+<%= submit_tag "创建" %>
+
+<%= link_to "取消", "#", :onclick => '$("#add-studnet-assignment").hide()' %>
+<% end%>
+</div>
 <h2><%= @assignment.title %></h2>
 <p><%= @assignment.desp %></p>
+<%= render :partial=> 'student_course_assignments/student_assignments',
+:locals => { :studentCourseAssignments => @assignment.student_course_assignments } %>
 
-<table  class="table table-hover table-striped">                        
-	<thead>
-                <tr>
-                  <th>学生</th>
-                  <th>上交时间</th>
-                  <th>附件名称</th>
-                  <th>操作</th> 
-
-                </tr>
-  </thead> 
-  <tbody> 
-	<% @assignment.student_course_assignments.each do |sta| %>     
-	<tr>  
-		<td><% if !sta.blank? %>
-			<% if !sta.user.blank?%>
-			    <%= sta.user.name %>
-			    <%end%>
-		   <%end%>
-		</td> 
-		<td><%=sta.created_at%></td> 
-		<th></th>
-		<td></td> 
-	</tr> 
-	<%end%>   
-	</tbody>
-</table>
-<%= link_to 'Create new', new_assignment_student_course_assignment_path(@assignment) %>
