@@ -50,6 +50,7 @@ GEM
       sass (>= 3.2)
       thor
     builder (3.0.4)
+    cancan (1.6.8)
     cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -132,6 +133,7 @@ GEM
       json (~> 1.4)
     responders (0.9.3)
       railties (~> 3.1)
+    rolify (3.2.0)
     sass (3.2.3)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
@@ -160,12 +162,15 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   bootstrap-sass (~> 2.2.1.1)
+  cancan
   coffee-rails (~> 3.2.1)
+  devise
   gravtastic
   jquery-rails
   meta_search (>= 1.1.0.pre)
   paperclip (~> 3.0)
   rails (= 3.2.8)
+  rolify
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)

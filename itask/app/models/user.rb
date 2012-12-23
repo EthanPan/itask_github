@@ -1,12 +1,26 @@
 class User < ActiveRecord::Base
+  rolify
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :role_ids
+  attr_accessible :email, :password, :password_confirmation, :remember_me
   include Gravtastic
   gravtastic
-  attr_accessible :user_num, :name, :sex ,:password,:email,:role
+ 
+  attr_accessible :user_num, :name, :sex, :id
   has_many   :user_course_years
   has_many   :courses
   has_many   :assignments
   has_many   :course_years, :through => :user_course_years
-  
+  validates_presence_of :user_num,:email
+  validates_uniqueness_of :user_num,:email
+
 
   def self.try_to_login(user_num,password)
   	return nil if password.empty?

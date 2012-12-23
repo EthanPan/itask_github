@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121217140544) do
+ActiveRecord::Schema.define(:version => 20121223023005) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20121217140544) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "user_num"
   end
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
@@ -58,8 +59,14 @@ ActiveRecord::Schema.define(:version => 20121217140544) do
   end
 
   create_table "attachments", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.integer  "user_id"
+    t.integer  "student_course_assignment_id"
+    t.string   "user_upload_file_name"
+    t.string   "user_upload_content_type"
+    t.integer  "user_upload_file_size"
+    t.datetime "user_upload_updated_at"
   end
 
   create_table "course_years", :force => true do |t|
@@ -80,6 +87,17 @@ ActiveRecord::Schema.define(:version => 20121217140544) do
 
   add_index "courses", ["course_num"], :name => "index_courses_on_course_num", :unique => true
 
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
+  add_index "roles", ["name"], :name => "index_roles_on_name"
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -90,36 +108,15 @@ ActiveRecord::Schema.define(:version => 20121217140544) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
-  create_table "stu_course_years", :force => true do |t|
-    t.integer  "stu_id"
-    t.integer  "course_year_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "student_course_assignments", :force => true do |t|
+    t.integer  "assignment_id"
+    t.integer  "user_id"
+    t.integer  "score"
+    t.string   "comment"
+    t.integer  "finish_status"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
-
-  create_table "students", :force => true do |t|
-    t.string   "stu_id"
-    t.string   "name"
-    t.boolean  "sex"
-    t.string   "password"
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "students", ["stu_id"], :name => "index_students_on_stu_id", :unique => true
-
-  create_table "teachers", :force => true do |t|
-    t.string   "teach_id"
-    t.string   "name"
-    t.boolean  "sex"
-    t.string   "password"
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "teachers", ["teach_id"], :name => "index_teachers_on_teach_id", :unique => true
 
   create_table "user_course_years", :force => true do |t|
     t.integer  "user_num"
@@ -132,13 +129,29 @@ ActiveRecord::Schema.define(:version => 20121217140544) do
     t.string   "user_num"
     t.string   "name"
     t.boolean  "sex"
-    t.string   "password"
-    t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "role"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["user_num"], :name => "index_users_on_user_num", :unique => true
+
+  create_table "users_roles", :id => false, :force => true do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+  end
+
+  add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
 
 end

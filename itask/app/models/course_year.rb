@@ -1,4 +1,5 @@
 class CourseYear < ActiveRecord::Base
+	resourcify
   attr_accessible :year, :semester, :course_id 
   belongs_to :course
   has_many   :assignments

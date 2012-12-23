@@ -13,32 +13,34 @@
               <li class="active"><a href="#">动态</a></li>
               <li><%= link_to "课程", course_years_path%></li>
               <li><a href="#contact">我的作业</a></li>
-              <% if !@current_user.blank? %>
-               <% if @current_user.role <= 2 %>
+              <% if user_signed_in? %>
+              <% if current_user.has_role? :teacher  %>
+               
               <li><%= link_to "管理", manage_path%></li>
+             
               <% end %>
-              <% end %>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="nav-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+              <%end%>
             </ul>
             <form class="navbar-form pull-right">
              
                <ul class="nav">
-                 <% if @current_user.blank? %>
-                    <li><%= link_to "登录", signin_path%></li>
+                 <% if !current_user %>
+                    <li><%= link_to "登录", new_user_session_path%></li>
                 <%else%>
-                    <li><%= image_tag @current_user.gravatar_url(:rating => 'R', :secure => true,:size=>30) %>  </li>
-                    <li><%= link_to "注销", signout_path%></li>
+                    <li style="padding-top:5px;"><%= image_tag current_user.gravatar_url(:rating => 'R', :secure => true,:size=>30),class:"img-rounded" %>  </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <%= current_user.name %> 
+                      <b class="caret"></b></a>
+                      <ul class="dropdown-menu">
+                        <li><%= link_to "修改个人资料",edit_user_registration_path%></li>
+                        
+                        <li class="divider"></li>
+                         <li><%= link_to "注销",destroy_user_session_path,:method => "delete"%></li>
+
+                      </ul>
+                   </li>
+                  
                 <%end%>
               </ul>
              <!--  <input class="span2" type="text" placeholder="学号/工号">

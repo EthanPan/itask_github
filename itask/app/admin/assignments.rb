@@ -12,7 +12,7 @@ ActiveAdmin.register Assignment do
  end
  form do |f|                         
     f.inputs "New Assignment" do       
-      f.input :course_year  ,:as => :select , :collection => Hash[CourseYear.all.map{|cy| [cy.year+" | "+cy.semester+" | "+cy.course.name,cy.id ]}]#CourseYear.all       
+      f.input :course_year  ,:as => :select , :collection => Hash[CourseYear.all.map{|cy| [cy.year+" | "+cy.semester+" | "+cy.course.name+" | Teacher:"+cy.course.user.name,cy.id ]}]#CourseYear.all       
       f.input :user
       f.input :title               
       f.input :desp  
