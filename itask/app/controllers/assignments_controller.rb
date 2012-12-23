@@ -28,6 +28,7 @@ class AssignmentsController < ApplicationController
 		end
 		respond_to do |format|
       	if @assignment.save
+      		add_event_info(@assignment,'create assignment',@assignment)
         	format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         	format.json { render json: @assignment, status: :created, location: @assignment }
       	else
