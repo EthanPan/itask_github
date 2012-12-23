@@ -14,11 +14,11 @@
 	<tr>  
 		<td><%= a.title %></td> 
 		<td><%= a.desp %></td> 
-		<th><%= a.user.name%></th>
 		<td><%= link_to "view details" ,assignment_path(a)%></td> 
 	</tr> 
 	<%end%>   
 	</tbody>
 </table>
-
+<% if current_user.has_role? :teacher or current_user.has_role? :TA%>
 <%= link_to '新建作业', new_course_year_assignment_path(@courseyear) ,class:"btn"%> 
+<% end %>

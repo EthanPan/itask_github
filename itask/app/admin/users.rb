@@ -12,8 +12,9 @@ ActiveAdmin.register User do
       f.input :user_num  
       f.input :name
       f.input :email
-      f.input :role_ids ,:collection => Role.all , :label_method => lambda {|t| t.name.titleize}
+      f.input :role_ids ,:collection => Hash[Role.all.map{|r| [r.name,r.id ]}] 
       end                               
     f.buttons                         
   end  
+
 end

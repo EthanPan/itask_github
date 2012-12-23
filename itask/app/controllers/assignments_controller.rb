@@ -22,9 +22,9 @@ class AssignmentsController < ApplicationController
 	def create
 		 @assignment = Assignment.new(params[:assignment])
 		 @assignment.course_year = @courseyear
-        user = User.find_by_user_num(session[:user_num])
-        if user
-			@assignment.user = user
+        
+        if current_user
+			@assignment.user = current_user
 		end
 		respond_to do |format|
       	if @assignment.save

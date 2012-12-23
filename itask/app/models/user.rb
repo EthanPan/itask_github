@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many   :user_course_years
   has_many   :courses
   has_many   :assignments
+  has_many   :student_course_assignments
   has_many   :course_years, :through => :user_course_years
   validates_presence_of :user_num,:email
   validates_uniqueness_of :user_num,:email

@@ -26,7 +26,9 @@ Itask::Application.routes.draw do
   resources :course_years do
      resources :assignments
   end
-  resources :assignments
+  resources :assignments do
+     resources :student_course_assignments
+  end
   # Sample resource route with options:
   #   resources :products do
   #     member do
