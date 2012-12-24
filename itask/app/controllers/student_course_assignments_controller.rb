@@ -5,10 +5,18 @@ class StudentCourseAssignmentsController < ApplicationController
     end
 	def new
 		@sca = StudentCourseAssignment.new
+		@sca.attachments.build
+
 	end
 	def create
-		@sca = StudentCourseAssignment.new(params[:student_assignment])
 		@assignment = Assignment.find(params[:assignment_id])
+		if @assignment.student_course_assignments.find(:all,:include => [:user], :conditions =>["user_id = ?", current_user.id])
+			flash[:alert] = "you have uploaded"			
+			redirect_to course_years_path
+			return
+	    end
+		@sca = StudentCourseAssignment.new(params[:student_course_assignment])
+		
 		@sca.user = current_user
 		@sca.assignment = @assignment
 		if @sca.save

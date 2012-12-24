@@ -10,8 +10,7 @@
 <h2><%= "上传作业"%></h2>
 <%= form_for @sca, :url => assignment_student_course_assignments_path(@assignment),
                                            :html => { :id => 'student-assignment-form', :multipart => true } do |f| %>
-<%= render :partial => 'student_course_assignments/form', :locals => { :f => f ,
-	:attachment => @sca.attachment } %>
+<%= render :partial => 'student_course_assignments/form', :locals => { :f => f } %>
 <%= submit_tag "创建" %>
 
 <%= link_to "取消", "#", :onclick => '$("#add-studnet-assignment").hide()' %>

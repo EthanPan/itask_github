@@ -1,6 +1,7 @@
 class StudentCourseAssignment < ActiveRecord::Base
-  attr_accessible :score, :comment, :finish_status
+  attr_accessible :score, :comment, :finish_status,:attachments, :attachments_attributes
+  has_many :attachments ,:as => :attachmentable,:dependent => :destroy
   belongs_to :assignment
   belongs_to :user
-  has_many :attachments
+  accepts_nested_attributes_for :attachments
 end

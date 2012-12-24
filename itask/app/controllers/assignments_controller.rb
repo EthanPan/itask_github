@@ -18,8 +18,9 @@ class AssignmentsController < ApplicationController
 
     respond_to do |format|
         format.html {
-        @sca = StudentCourseAssignment.new # for adding news inline
-        
+        @sca = StudentCourseAssignment.new 
+        @sca.attachments.build
+        # @sca.attachments.build
         }
     end
 	    @assignment = Assignment.find(params[:id])

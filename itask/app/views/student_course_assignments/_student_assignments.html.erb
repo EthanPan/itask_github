@@ -18,7 +18,11 @@
 		   <%end%>
 		</td> 
 		<td><%=sta.created_at%></td> 
-		<th></th>
+		<th><% if !sta.attachments.blank? %>
+			    <% sta.attachments.each do |a| %>
+			    	<%= a.user_upload_file_name %>
+			    <%end%>
+		   <%end%></th>
 		<td></td> 
 	</tr> 
 	<%end%>   

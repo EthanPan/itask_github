@@ -1,5 +1,5 @@
 class Attachment < ActiveRecord::Base
-  # attr_accessible :title, :body
-  belongs_to :student_course_assignment
+  attr_accessible :user_upload
+  belongs_to :attachmentable , :polymorphic => true
   has_attached_file :user_upload
 end

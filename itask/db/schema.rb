@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223091710) do
+ActiveRecord::Schema.define(:version => 20121223174121) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -59,14 +59,16 @@ ActiveRecord::Schema.define(:version => 20121223091710) do
   end
 
   create_table "attachments", :force => true do |t|
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "user_id"
     t.integer  "student_course_assignment_id"
     t.string   "user_upload_file_name"
     t.string   "user_upload_content_type"
     t.integer  "user_upload_file_size"
     t.datetime "user_upload_updated_at"
+    t.integer  "attachmentable_id",            :default => 0,  :null => false
+    t.string   "attachmentable_type",          :default => "", :null => false
   end
 
   create_table "course_years", :force => true do |t|
