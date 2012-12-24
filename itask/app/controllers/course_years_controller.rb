@@ -9,7 +9,7 @@ class CourseYearsController < ApplicationController
   	@courseyear = CourseYear.find(params[:id])
 
     respond_to do |format|
-      if @courseyear.update_attributes(params[:id],:notice => params[:courseyear][:notice])
+      if @courseyear.update_attributes(params[:course_year])
         format.html { redirect_to course_year_assignments_path(@courseyear), notice: 'Notice was successfully updated.' }
         format.json { head :no_content }
       else
