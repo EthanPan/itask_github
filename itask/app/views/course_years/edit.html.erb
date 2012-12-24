@@ -1,0 +1,24 @@
+<%= form_for(@courseyear) do |f| %>
+  <% if @courseyear.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@courseyear.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+      <ul>
+      <% @courseyear.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :notice %><br />
+    <%= f.text_field :notice %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', course_year_assignments_path(@courseyear) %>

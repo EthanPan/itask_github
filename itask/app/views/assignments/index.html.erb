@@ -1,4 +1,7 @@
-
+<% if flash[:notice] -%>
+	<div id="notice"><%= flash[:notice] %></div>
+<% end -%>
+<%= @courseyear.notice %>
 <table  class="table table-hover table-striped">                        
 	<thead>
                 <tr>
@@ -20,6 +23,7 @@
 	<%end%>   
 	</tbody>
 </table>
-<% if current_user.has_role? :teacher or current_user.has_role? :TA%>
-<%= link_to '新建作业', new_course_year_assignment_path(@courseyear) ,class:"btn"%> 
+<% if !current_user or current_user.has_role? :teacher or current_user.has_role? :TA%>
+<%= link_to '新建作业', new_course_year_assignment_path(@courseyear) ,class:"btn"%>
+<%= link_to '更新公告', edit_course_year_path(@courseyear) ,class:"btn"%> 
 <% end %>
