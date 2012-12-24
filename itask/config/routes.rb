@@ -35,6 +35,12 @@ Itask::Application.routes.draw do
 	 end
   end
   resources :student_course_assignments
+
+  resources :attachments  do
+      member do
+        get 'download'
+      end
+  end
   # Sample resource route with options:
   #   resources :products do
   #     member do

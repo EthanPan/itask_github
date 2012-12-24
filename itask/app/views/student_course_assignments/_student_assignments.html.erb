@@ -21,9 +21,10 @@
 		<th><% if !sta.attachments.blank? %>
 			    <% sta.attachments.each do |a| %>
 			    	<%= a.user_upload_file_name %>
+			    	<%= link_to_remote"下载" ,download_attachment_path(a) %>
 			    <%end%>
 		   <%end%></th>
-		<td></td> 
+		<td><%= link_to "删除",student_course_assignment_path(sta),:method => "delete"%></td> 
 	</tr> 
 	<%end%>   
 	</tbody>

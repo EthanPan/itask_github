@@ -10,9 +10,9 @@ class StudentCourseAssignmentsController < ApplicationController
 	end
 	def create
 		@assignment = Assignment.find(params[:assignment_id])
-		if @assignment.student_course_assignments.find(:all,:include => [:user], :conditions =>["user_id = ?", current_user.id])
-			flash[:alert] = "you have uploaded"			
-			redirect_to course_years_path
+		if  !StudentCourseAssignment.where("user_id=? and assignment_id = ?",current_user.id,@assignment.id).blank?
+			flash[:alert] = "you have uploaded "		
+			redirect_to assignment_path(@assignment)
 			return
 	    end
 		@sca = StudentCourseAssignment.new(params[:student_course_assignment])
@@ -21,14 +21,23 @@ class StudentCourseAssignmentsController < ApplicationController
 		@sca.assignment = @assignment
 		if @sca.save
 			flash[:alert] = "success"
-			redirect_to course_years_path
+			redirect_to assignment_path(@assignment)
 		else
 			flash[:alert] = "fail"
-			redirect_to course_years_path
+			redirect_to assignment_path(@assignment)
 		end
 
 	end
-
+    def destroy
+    	@sca = StudentCourseAssignment.find(params[:id])
+    	@sca.attachments do |a|
+    		a.user_upload = nil
+    		a.save
+    	end
+    	@sca.save
+    	@sca.destroy
+    	redirect_to assignment_path(@sca.assignment)
+    end
 	
 	def grade
 	if request.put?
