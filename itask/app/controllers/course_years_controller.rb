@@ -1,9 +1,13 @@
 class CourseYearsController < ApplicationController
   def index
-    @course_years = CourseYear.all    
+    @courseyears = CourseYear.all    
   end
   def edit
   	@courseyear = CourseYear.find(params[:id])
+  end
+  def show
+    @courseyear = CourseYear.find(params[:id])
+
   end
   def update
   	@courseyear = CourseYear.find(params[:id])

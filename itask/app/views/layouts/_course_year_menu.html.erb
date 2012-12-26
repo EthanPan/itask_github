@@ -1,0 +1,15 @@
+
+              <ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "课程首页",course_year_path(@courseyear)%>
+  </li>
+  <li><%= link_to "作业", course_year_assignments_path(@courseyear)%></li>
+  <li><% if user_signed_in? %>
+              <% if current_user.has_role? :teacher  %>
+               
+              <li><%= link_to "管理", manage_path%></li>
+             
+              <% end %>
+              <%end%>
+   </li>
+</ul>
