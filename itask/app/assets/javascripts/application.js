@@ -10,9 +10,9 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//= require jquery
-//= require jquery_ujs
-//= require_tree .
+ //= require jquery
+ //= require jquery_ujs
+ //= require_tree .
 function showAndScrollTo(id, focus) {
   $('#'+id).show();
   if (focus!=null) {
@@ -20,3 +20,6 @@ function showAndScrollTo(id, focus) {
   }
   $('html, body').animate({scrollTop: $('#'+id).offset().top}, 100);
 }
+$(document).ready(function(){
+	$('.datepicker').datepicker();
+});

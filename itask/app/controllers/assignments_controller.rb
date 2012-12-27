@@ -44,7 +44,7 @@ class AssignmentsController < ApplicationController
         	format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
         	format.json { render json: @assignment, status: :created, location: @assignment }
       	else
-        	format.html { render action: "new" }
+        	format.html { render action: "new", notice: 'Imporper attributes' }
         	format.json { render json: @assignment.errors, status: :unprocessable_entity }
       	end
     end

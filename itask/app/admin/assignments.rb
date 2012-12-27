@@ -16,7 +16,6 @@ ActiveAdmin.register Assignment do
       f.input :user
       f.input :title               
       f.input :desp  
-      f.input :open_time 
        f.input :end_time 
     end                               
     f.buttons                         
