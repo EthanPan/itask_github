@@ -21,6 +21,6 @@
 	</tbody>
 </table>
 <% if !current_user or current_user.has_role? :teacher or current_user.has_role? :TA%>
-<%= link_to '新建作业', new_course_year_assignment_path(@courseyear) ,class:"btn"%>
+<%= link_to '新建作业', new_course_year_assignment_path(@course_year) ,class:"btn"%>
 
 <% end %>

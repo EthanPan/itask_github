@@ -3,15 +3,15 @@ class AssignmentsController < ApplicationController
 	
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
-		@assignments = @courseyear.assignments
+		@assignments = @course_year.assignments
 	end
 	
 	def edit
 	end
 	
 	def show_by_course
-		@courseyear = CourseYear.find(params[:id])
-		@assignments = @courseyear.assignments
+		@course_year = CourseYear.find(params[:id])
+		@assignments = @course_year.assignments
 	end 
 
 	def show
@@ -33,7 +33,7 @@ class AssignmentsController < ApplicationController
 
 	def create
 		 @assignment = Assignment.new(params[:assignment])
-		 @assignment.course_year = @courseyear
+		 @assignment.course_year = @course_year
         
         if current_user
 			@assignment.user = current_user

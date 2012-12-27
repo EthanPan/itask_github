@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   #   end
   #   @current_user
   # end
+  
   def add_event_info(assign,action,object)
     @event = Event.new
     @event.assignment = assign
@@ -26,7 +27,7 @@ class ApplicationController < ActionController::Base
     @event.save
   end
   def find_course_year_by_course_year_id
-    @courseyear = CourseYear.find(params[:course_year_id])
+    @course_year = CourseYear.find(params[:course_year_id])
   rescue ActiveRecord::RecordNotFound
     render 404
   end
