@@ -1,10 +1,11 @@
 
-              <ul class="nav nav-tabs">
-  <li class="active">
-    <%= link_to "课程首页",course_year_path(@courseyear)%>
+<ul class="nav nav-tabs">
+ 
+  <li class="<%= 'active' if params[:controller] == 'course_years' && params[:action] == 'show' %> ">
+    <%= link_to "课程首页",course_year_path(@courseyear) %>
   </li>
-  <li><%= link_to "作业", course_year_assignments_path(@courseyear)%></li>
-  <li>
+  <li class="<%= 'active' if params[:controller] == 'assignments'%> "><%= link_to "作业", course_year_assignments_path(@courseyear)%></li>
+  <li class="<%= 'active' if params[:controller] == 'course_years' && params[:action] == 'manage' %> ">
     <% if user_signed_in? %>
          <% if current_user.has_role? :teacher  %>
             <%= link_to "管理", manage_course_year_path(@courseyear)%>
