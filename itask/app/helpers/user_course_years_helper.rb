@@ -1,0 +1,2 @@
+module UserCourseYearsHelper
+end

@@ -129,10 +129,12 @@ ActiveRecord::Schema.define(:version => 20121227140107) do
   end
 
   create_table "user_course_years", :force => true do |t|
-    t.integer  "user_num"
+    t.integer  "user_id"
     t.integer  "course_year_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "status"
+    t.integer  "score"
   end
 
   create_table "users", :force => true do |t|
