@@ -9,6 +9,9 @@ class CourseYearsController < ApplicationController
     @courseyear = CourseYear.find(params[:id])
 
   end
+  def manage
+    @courseyear = CourseYear.find(params[:id])
+  end
   def update
   	@courseyear = CourseYear.find(params[:id])
 

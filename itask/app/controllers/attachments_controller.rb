@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-
+    before_filter :find_attachment ,:except=> :upload
 	def download
 	   @attachment = Attachment.find(params[:id])
 	    file_name = @attachment.user_upload_file_name
@@ -10,4 +10,12 @@ class AttachmentsController < ApplicationController
 	        return
 	    end
 	end
+
+	private 
+	def find_attachment
+		@attachment = Attachment.find(params[:id])
+		# Show 404 if the filename in the url is wrong
+    	raise ActiveRecord::RecordNotFound if params[:filename] && params[:filename] != @attachment.user_upload_file_name
+	end
+
 end

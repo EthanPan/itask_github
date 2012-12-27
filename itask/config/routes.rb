@@ -10,7 +10,9 @@ Itask::Application.routes.draw do
   # match 'logout', :to => 'devise#logout', :as => 'signout'
   #match 'account/register', :to => 'account#register', :via => [:get, :post], :as => 'register'
   match 'manage', :to => 'manage#index'
-  # The priority is based upon order of creation:
+  match 'attachments/download/:id/:filename', :controller => 'attachments', :action => 'download', :id => /\d+/, :filename => /.*/, :via => :get
+  match 'attachments/download/:id', :controller => 'attachments', :action => 'download', :id => /\d+/, :via => :get
+    # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
@@ -24,6 +26,9 @@ Itask::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :course_years do
+    member do
+      get 'manage'
+    end
      resources :assignments
   end
   resources :assignments do
