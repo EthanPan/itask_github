@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   has_many   :course_years, :through => :user_course_years
   validates_presence_of :user_num,:email
   validates_uniqueness_of :user_num,:email
-
+ 
 
   def self.try_to_login(user_num,password)
   	return nil if password.empty?
@@ -39,6 +39,28 @@ class User < ActiveRecord::Base
 
   def self.current
     @current_user ||= User.anonymous
+  end
+
+  def has_a_course_year(course_year_id)
+    UserStudentYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
+  end
+  def attend_to_course(course_year_id)
+    if @student_course_year = UserCourseYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
+      @student_course_year.status = 1
+      @student_course_year.save
+    end
+  end
+
+  def apply_for_course(course_year_id)
+    if !course_year_id.blank?
+      @course_year = CourseYear.find(course_year_id)
+      if @course_year.has_a_student(self.id)
+        return
+      end
+      @student_course_year = @course_year.user_course_years.build(:status => 0)
+      @student_course_year.user = self
+      @student_course_year.save
+    end
   end
   # Returns the anonymous user.  If the anonymous user does not exist, it is created.  There can be only
   # one anonymous user per database.

@@ -19,6 +19,7 @@ class StudentCourseAssignmentsController < ApplicationController
 		
 		@sca.user = current_user
 		@sca.assignment = @assignment
+		@sca.finish_status = 0
 		if @sca.save
 			flash[:alert] = "success"
 			redirect_to assignment_path(@assignment)

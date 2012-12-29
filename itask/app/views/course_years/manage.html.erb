@@ -15,20 +15,29 @@
                 </tr>
   </thead> 
   <tbody> 
-   <% @course_year.users.each do |u| %>     
+   <% @course_year.user_course_years.each do |uc| %>     
 	<tr>  
-		<td><%= u.user_num %></td> 
-		<td><%= u.name %></td>
-		<td><% if u.status == 0%>
+		<td><%= uc.user.user_num %></td> 
+		<td><%= uc.user.name %></td>
+		<td><% if uc.status == 1%>
 			<span class="badge badge-success">通过</span>
 			
-			<% elsif u.status == 1%>
+			<% elsif uc.status == 0%>
+
 			<span class="badge badge-important">待审核</span>
-			<% elsif u.status == 2%>
-			<span class="badge badge-inverse">未通过</span>
+
+
+
 			<%end%>
 		</td> 
-		<th><%= link_to "删除" ,user_course_year_path(u),:method => "delete"%></th>
+         <td>
+         	<% if uc.status == 0%>
+         	<%= link_to "批准",approve_user_course_year_path(uc)%>
+               <%= link_to "不批准",user_course_year_path(uc),:method => 'delete'%> </td>
+            <%elsif uc.status == 1%>
+               <%= link_to "移除",user_course_year_path(uc),:method => 'delete'%> </td>
+            <%end%>
+
 	</tr> 
 	<%end%>   
 	</tbody>

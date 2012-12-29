@@ -27,11 +27,17 @@ Itask::Application.routes.draw do
   #   resources :products
   resources :course_years do
     member do
+      get 'apply'
       get 'manage'
     end
      resources :assignments
+
   end
-  
+  resources :user_course_years do
+    member do
+      get 'approve'
+    end
+  end
   resources :assignments do
      resources :student_course_assignments do
 		member do 
@@ -39,6 +45,7 @@ Itask::Application.routes.draw do
 		  put 'grade'
 		end
 	 end
+
   end
   resources :student_course_assignments
 

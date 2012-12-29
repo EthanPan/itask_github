@@ -4,6 +4,7 @@ class AssignmentsController < ApplicationController
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
 		@assignments = @course_year.assignments
+
 	end
 	
 	def edit
@@ -15,6 +16,16 @@ class AssignmentsController < ApplicationController
 	end 
 
 	def show
+	@assignment = Assignment.find(params[:id])
+    student_course_assignments = @assignment.student_course_assignments
+    finish_students = Array.new
+
+	    student_course_assignments.each do |sca|
+	         finish_students.push(sca.user)
+	    end
+
+    students = @assignment.course_year.active_students
+    @unfinish_students =  students - finish_students
 
     respond_to do |format|
         format.html {
@@ -23,7 +34,7 @@ class AssignmentsController < ApplicationController
         # @sca.attachments.build
         }
     end
-	    @assignment = Assignment.find(params[:id])
+	    
 	end
 
 	def new

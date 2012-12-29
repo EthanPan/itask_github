@@ -2,4 +2,8 @@
 
 <%= @course_year.notice %>
 <br/>
+
+<% if user_signed_in?  %>
+   <%= link_to '申请加入该课程',apply_course_year_path(@course_year),:class => 'btn' if !@course_year.has_a_student(current_user.id)%>
+<% end %>
 <%= link_to '更新公告', edit_course_year_path(@course_year) ,class:"btn"%> 
