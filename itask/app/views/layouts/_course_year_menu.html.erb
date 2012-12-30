@@ -1,4 +1,10 @@
-
+<ul class="breadcrumb">
+  <li><%= link_to "课程列表",course_years_path %> <span class="divider">/</span></li>
+   <li class="active">课程详情</li>
+</ul>
+<div class="page-header">
+  <h1><%= @course_year.course.name %> <small>老师:<%= @course_year.course.user.name%></small></h1>
+</div>
 <%= render_list :class => "nav nav-tabs" do |li|
      li << link_to( "课程首页", course_year_path(@course_year))
      li << link_to("作业", course_year_assignments_path(@course_year) ) 

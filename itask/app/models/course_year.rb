@@ -9,8 +9,7 @@ class CourseYear < ActiveRecord::Base
   validates :year , :format => { :with =>/[1-9]\d{3}-[1-9]\d{3}$/,:message =>"format should like 2012-2013" }
   validates :semester, :inclusion => { :in => %w(1 2),:message => "%{value} is not a valid semester" }
 
-  scope :activestudents,  joins(:user_course_years) & UserCourseYear.approve  
-
+ 
   def active_students
   	user_course_years = UserCourseYear.where(:course_year_id => self.id,:status => 1)
   	students = Array.new

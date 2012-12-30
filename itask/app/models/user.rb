@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def has_a_course_year(course_year_id)
-    UserStudentYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
+    UserCoursetYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
   end
   def attend_to_course(course_year_id)
     if @student_course_year = UserCourseYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
@@ -50,7 +50,31 @@ class User < ActiveRecord::Base
       @student_course_year.save
     end
   end
+  
+  def all_finished_assignments
+         all_course_years = all_user_course_years
+         all_finished_assignments = Array.new
 
+         all_course_years.each do |cy|
+            cy.assignments.each do |as|
+              if as.has_a_finished_student(self)
+                all_finished_assignments.push(as)
+              end
+            end
+         end
+         all_finished_assignments
+  end
+  def all_user_course_years
+     user_course_years = self.user_course_years
+     course_years = Array.new
+      
+     user_course_years.each do |ucy|
+        course_years.push(ucy.course_year)
+      end
+      course_years
+  end
+  
+ 
   def apply_for_course(course_year_id)
     if !course_year_id.blank?
       @course_year = CourseYear.find(course_year_id)

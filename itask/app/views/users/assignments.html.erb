@@ -1,0 +1,27 @@
+<%= render 'users/user_menu' %>
+
+
+    
+    <table  class="table table-hover table-striped">	
+    	 	<thead>
+                <tr>
+                  <th>课程</th>
+                  <th>作业</th>
+                  <th>截至日期</th>
+                  <th>操作</th> 
+
+                </tr>
+  </thead> 
+   <tbody> 
+	<% @all_finished_assignments.each do |fs| %>     
+	<tr>  
+		<td><%= fs.course_year.course.name%></td> 
+		<td><%= fs.title %></td> 
+		<th><%= fs.end_time%></th>
+		<td></td> 
+	</tr> 
+	<%end%>   
+	</tbody>
+</table>
+</div>
+<%= render 'users/user_info'%>

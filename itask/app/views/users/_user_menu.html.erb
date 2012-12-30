@@ -1,0 +1,9 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+<div class="span8">
+<%= render_list :class => "nav nav-tabs" do |li|
+     li << link_to( "动态", user_path(@user))
+     li << link_to( "课程", courses_user_path(@user))
+     li << link_to("作业", assignments_user_path(@user))
+              
+end %>

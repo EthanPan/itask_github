@@ -3,4 +3,5 @@ class UserCourseYear < ActiveRecord::Base
   belongs_to :user
   belongs_to :course_year
   scope :approve ,where(:status => 1)
+
 end

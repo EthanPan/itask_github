@@ -25,6 +25,13 @@ Itask::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+  resources :events
+  resources :users do
+    member do
+      get 'assignments'
+      get 'courses'
+    end
+  end
   resources :course_years do
     member do
       get 'apply'

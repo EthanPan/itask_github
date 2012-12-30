@@ -18,9 +18,9 @@
 		<td><%= c.course.name %></td>
 		<td><%= c.course.user.name %></td>
 		<td><%= link_to "View" , course_year_path(c) %></td>
-		<% if can? :destroy, c %>
+<!-- 		<% if can? :destroy, c %>
   			<td><%= link_to "delete", course_year_path(c),:method=>"delete" %></td>
-		<% end %>
+		<% end %> -->
 	</tr>
 	<% end %>  
 	</tbody>

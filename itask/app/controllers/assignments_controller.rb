@@ -17,15 +17,8 @@ class AssignmentsController < ApplicationController
 
 	def show
 	@assignment = Assignment.find(params[:id])
-    student_course_assignments = @assignment.student_course_assignments
-    finish_students = Array.new
-
-	    student_course_assignments.each do |sca|
-	         finish_students.push(sca.user)
-	    end
-
-    students = @assignment.course_year.active_students
-    @unfinish_students =  students - finish_students
+    
+    @unfinish_students =  @assignment.unfinished_students
 
     respond_to do |format|
         format.html {
