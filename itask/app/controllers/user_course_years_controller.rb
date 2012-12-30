@@ -9,7 +9,7 @@ class UserCourseYearsController < ApplicationController
 
 	def approve
 		@uc = UserCourseYear.find(params[:id])
-		current_user.attend_to_course(@uc.course_year.id)
+		@uc.user.attend_to_course(@uc.course_year.id)
 		@course_year = @uc.course_year
 		redirect_to manage_course_year_path(@course_year)
 	end

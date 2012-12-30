@@ -26,7 +26,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'rufus-scheduler', '~> 2.0.17'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
