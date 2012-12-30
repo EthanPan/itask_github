@@ -23,7 +23,17 @@
 			    	<%= link_to_attachment a ,:download=>true%>
 			    <%end%>
 		   <%end%></th>
-		<td><%= link_to "删除",student_course_assignment_path(sta),:method => "delete"%></td> 
+		<td>
+			<% if !sta.attachments.blank? %>
+			    <% sta.attachments.each do |a| %>
+			    	<%= link_to "查看", a.user_upload.url(:original, false), :title => a.user_upload_file_name, :target => "_blank" %>
+				<%end%>
+			<%end%>
+			
+			<%= link_to "评分", grade_assignment_student_course_assignment_path(@assignment,sta), :target => "_blank" %>
+			<%= link_to "删除", student_course_assignment_path(sta),:method => "delete"%>
+			
+		</td> 
 	</tr> 
 	<%end%>   
 	</tbody>

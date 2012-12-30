@@ -47,7 +47,7 @@ Itask::Application.routes.draw do
 	 end
 
   end
-  resources :student_course_assignments
+  resources :student_course_assignments 
 
   resources :attachments  do
       member do
