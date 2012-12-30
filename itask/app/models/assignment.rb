@@ -6,5 +6,5 @@ class Assignment < ActiveRecord::Base
   belongs_to :course_year
   belongs_to :user
 
-  validates :end_time, :format => { :with => /\A(0|1)\d\/\d{2}\/(1|2)\d{3}\z/, :message => "format should like 01-01-2012"}
+  validates :end_time, :format => { :with => /\A(1|2)\d{3}-(0|1)\d-\d{2}\z/, :message => "format should like 2012-01-01"}
 end
