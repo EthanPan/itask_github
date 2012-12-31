@@ -1,6 +1,8 @@
 class AttachmentsController < ApplicationController
     before_filter :find_attachment ,:except=> :upload
 	
+	require 'zip/zip'
+	require 'zip/zipfilesystem'
 		
 	def download
 	   @attachment = Attachment.find(params[:id])

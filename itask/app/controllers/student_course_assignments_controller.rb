@@ -41,6 +41,7 @@ class StudentCourseAssignmentsController < ApplicationController
     	@sca.save
     	if @sca.destroy
     		flash[:alert] = "success"
+    	end
     	redirect_to course_year_assignment_path(@course_year,@assignment)
     end
 	
@@ -62,7 +63,8 @@ class StudentCourseAssignmentsController < ApplicationController
 	else
 		 @sca = StudentCourseAssignment.find(params[:id])
 		 @assignment = Assignment.find(params[:assignment_id])
-		 end
+		 
+	end
 	end
 		
 end
