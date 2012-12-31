@@ -84,9 +84,10 @@ class AttachmentsController < ApplicationController
 				else
 					@zip_file_name.push(f)
 					@zip_file_type.push("folder")
-					@zip_file_url.push(current_url)
+					
 					current_folder=current_folder+"/"+f
-					current_url=current_url+"/"+f
+					current_url=stored_url+"/"+f
+					@zip_file_url.push(current_url)
 					@zip_file_degree.push(last_degree)
 					show_file(current_folder,current_url,i)
 				end
