@@ -2,12 +2,33 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new # guest user (not logged in)
-    if user.has_role? :admin
+    
+    if user.blank?
+      # not logged in
+      cannot :manage, :all
+      basic_read_only
+
+    elsif user.has_role? :admin
       can :manage, :all
     elsif user.has_role? :teacher
       can :manage, CourseYear, :course => {:user => user }
-      
+      can :manage, Assignment, :course => {:user => user }
+      can :manage, User ,:id => user.id 
+      can :destroy, StudentCourseAssignment,:course_year=>{:course=>{:user=>user}}
+      basic_read_only
+    elsif user.has_role? :TA
+      can :manage, CourseYear, :assistants => {:user => user} 
+      can :manage, Assignment, :user => user 
+      can :manage, User ,:id => user.id 
+      can :manage, StudentCourseAssignment,:user => user
+
+      basic_read_only
+    elsif user.has_role? :student
+      can :manage, User ,:id => user.id  
+      can :manage, StudentCourseAssignment,:user => user
+      basic_read_only
+    else
+      basic_read_only
     end
     # Define abilities for the passed in user here. For example:
     #
@@ -32,6 +53,15 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
   end
+  protected
+    def basic_read_only
+      can :read,CourseYear
+      can :apply,CourseYear
+      can :read,User
+      can :read,Assignment
+      can :read,Event
+
+    end
 end
 # class Course
 #     belongs_to :course_year

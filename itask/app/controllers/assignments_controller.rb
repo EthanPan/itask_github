@@ -2,6 +2,7 @@ class AssignmentsController < ApplicationController
 	before_filter :find_course_year_by_course_year_id
 	before_filter :find_assignment_by_id,:only => [:show]
 	before_filter :initialize_breadcrumb ,:except => :index
+	load_and_authorize_resource
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
 		@assignments = @course_year.assignments

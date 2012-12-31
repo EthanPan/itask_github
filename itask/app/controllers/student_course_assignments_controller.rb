@@ -12,7 +12,7 @@ class StudentCourseAssignmentsController < ApplicationController
 		@assignment = Assignment.find(params[:assignment_id])
 		if  !StudentCourseAssignment.where("user_id=? and assignment_id = ?",current_user.id,@assignment.id).blank?
 			flash[:alert] = "you have uploaded "		
-			redirect_to assignment_path(@assignment)
+			redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 			return
 	    end
 		@sca = StudentCourseAssignment.new(params[:student_course_assignment])
@@ -22,22 +22,26 @@ class StudentCourseAssignmentsController < ApplicationController
 		@sca.finish_status = 0
 		if @sca.save
 			flash[:alert] = "success"
-			redirect_to assignment_path(@assignment)
+			redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 		else
 			flash[:alert] = "fail"
-			redirect_to assignment_path(@assignment)
+			redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 		end
 
 	end
     def destroy
+    	
     	@sca = StudentCourseAssignment.find(params[:id])
+    	@assignment = @sca.assignment
+    	@course_year = @sca.assignment.course_year
     	@sca.attachments do |a|
     		a.user_upload = nil
     		a.save
     	end
     	@sca.save
-    	@sca.destroy
-    	redirect_to assignment_path(@sca.assignment)
+    	if @sca.destroy
+    		flash[:alert] = "success"
+    	redirect_to course_year_assignment_path(@course_year,@assignment)
     end
 	
 	def grade
@@ -47,10 +51,10 @@ class StudentCourseAssignmentsController < ApplicationController
 		 @assignment = Assignment.find(params[:assignment_id])
 		 if @sca.save
 			flash[:alert] = "successfully"
-			redirect_to assignment_path(@assignment)
+			redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 		 else
 		     flash[:alert] = "fail!"
-			 redirect_to course_years_path
+			 redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 		 end
 
 	   

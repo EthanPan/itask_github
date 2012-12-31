@@ -1,6 +1,7 @@
 class CourseYearsController < ApplicationController
   before_filter :find_course_year_by_id ,:except => :index
   before_filter :initialize_breadcrumb ,:except => :index
+  load_and_authorize_resource
 
 
   def index
