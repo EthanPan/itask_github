@@ -28,6 +28,7 @@ end
 
 gem 'jquery-rails'
 gem 'rufus-scheduler', '~> 2.0.17'
+gem 'ckeditor', '~> 3.7.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

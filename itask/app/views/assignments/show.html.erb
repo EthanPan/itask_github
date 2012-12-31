@@ -17,8 +17,8 @@
 <%= link_to "取消", "#", :onclick => '$("#add-studnet-assignment").hide()' %>
 <% end%>
 </div>
-<h2><%= @assignment.title %></h2>
-<p><%= @assignment.desp %></p>
+<h2><%=  @assignment.title %></h2>
+<p><%=  raw @assignment.desp %></p>
 <%= render :partial=> 'student_course_assignments/student_assignments',
 :locals => { :studentCourseAssignments => @assignment.student_course_assignments } %>
 

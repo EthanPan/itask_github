@@ -64,6 +64,8 @@ Itask::Application.routes.draw do
         get 'download'
       end
   end
+
+  mount Ckeditor::Engine => "/ckeditor"
   # Sample resource route with options:
   #   resources :products do
   #     member do
