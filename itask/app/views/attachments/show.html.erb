@@ -1,0 +1,23 @@
+<% i=0 %>
+<% @zip_file_name.each do |zf| %>
+
+	
+	<% space="-" %>
+	<% @zip_file_degree[i].times do %>
+		<% space=space+"---"%>
+	<% end %>
+	
+	<%= space %>
+	<% if @zip_file_type[i] == "folder" %>
+		<%= zf %>
+		<%= @zip_file_url[i] %>
+	<% else %>
+
+		<%= link_to zf, @zip_file_url[i], :target => "_blank" %>
+		<%= @zip_file_url[i] %>
+	<% end %>
+
+	</br>
+	<% i=i+1 %>
+		
+<% end %>
