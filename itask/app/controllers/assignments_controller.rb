@@ -44,6 +44,7 @@ class AssignmentsController < ApplicationController
 
 	def create
 		 @assignment = Assignment.new(params[:assignment])
+		 @assignment.status = 0
 		 @assignment.course_year = @course_year
         
         if current_user
