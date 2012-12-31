@@ -26,8 +26,7 @@
   </div>
   <div class="field">
     <%= f.label :截止时间 %><br />
-    <input id="assignment_end_time" class="datepicker" type="text" size="30" name="assignment[end_time]"
-    data-date-format="yyyy-mm-dd">
+    <%= f.text_field :end_time, 'data-behaviour' => 'datepicker' %>
   </div>
   <div class="actions">
     <%= f.submit "Create"%>
