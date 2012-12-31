@@ -21,12 +21,14 @@ class UsersController < ApplicationController
         end
     end
     def assignments
-    	@user = User.find(params[:id])
-    	@all_finished_assignments = @user.all_finished_assignments
+    	@user = User.find(params[:id])   	
+    	@all_finished_assignments = @user.all_finished_assignments.paginate(:page => params[:page])
+
+    	@all_unfinished_assignments = @user.all_unfinished_assignments.paginate(:page => params[:page],:per_page=>1)
     end
     def courses
     	@user = User.find(params[:id])
-    	@all_user_course_year = @user.all_user_course_years
+    	@all_course_years = @user.all_course_years.paginate(:page => params[:page])
     end
 
 end

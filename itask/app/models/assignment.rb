@@ -5,8 +5,10 @@ class Assignment < ActiveRecord::Base
   has_many :events         
   belongs_to :course_year
   belongs_to :user
-
-  validates :end_time, :format => { :with => /\A(0|1)\d\/\d{2}\/(1|2)\d{3}\z/, :message => "format should like 01-01-2012"}
+  
+  #validates :end_time, :format => { :with => /\A(0|1)\d\/\d{2}\/(1|2)\d{3}\z/, :message => "format should like 01-01-2012"}
+  
+ 
   def unfinished_students
 
   	student_course_assignments = self.student_course_assignments

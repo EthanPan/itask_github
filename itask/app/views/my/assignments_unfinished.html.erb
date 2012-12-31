@@ -1,0 +1,26 @@
+<%= render 'my/assignments_menu' %>
+<div class="page-header">
+   <small>待完成</small>
+       <table  class="table table-hover table-striped"> 
+        <thead>
+                <tr>
+                  <th>课程</th>
+                  <th>作业</th>
+                  <th>截至日期</th>
+                  <th>操作</th> 
+
+                </tr>
+  </thead> 
+   <tbody> 
+  <% @all_unfinished_assignments.each do |fs| %>     
+  <tr>  
+    <td><%= fs.course_year.course.name%></td> 
+    <td><%= fs.title %></td> 
+    <th><%= fs.end_time%></th>
+    <td></td> 
+  </tr> 
+  <%end%>   
+  </tbody>
+</table>
+<%= will_paginate @all_unfinished_assignments %> 
+</div>

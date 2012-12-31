@@ -52,26 +52,24 @@ class User < ActiveRecord::Base
   end
   
   def all_finished_assignments
-         all_course_years = all_user_course_years
-         all_finished_assignments = Array.new
-
-         all_course_years.each do |cy|
-            cy.assignments.each do |as|
-              if as.has_a_finished_student(self)
-                all_finished_assignments.push(as)
-              end
-            end
-         end
-         all_finished_assignments
+     Assignment.joins(:student_course_assignments => :user).where(:student_course_assignments => {:user_id => self.id})    
   end
-  def all_user_course_years
-     user_course_years = self.user_course_years
-     course_years = Array.new
-      
-     user_course_years.each do |ucy|
-        course_years.push(ucy.course_year)
-      end
-      course_years
+
+  def all_unfinished_assignments
+      all_assignments = Assignment.joins(:course_year => :users).where(:users => {:id => self.id})
+       finished_assignments = all_finished_assignments
+       finished_assignment_ids = Array.new
+       finished_assignments.each do |fa|
+         finished_assignment_ids.push(fa.id)
+       end
+       if !finished_assignments.blank?
+           all_assignments.where(:id => finished_assignment_ids).delete_all
+       else
+           all_assignments
+       end
+  end
+  def all_course_years
+      CourseYear.joins(:user_course_years => :user).where(:users => {:id => self.id})
   end
   
  

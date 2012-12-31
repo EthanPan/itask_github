@@ -1,7 +1,8 @@
 <%= render 'users/user_menu' %>
 
-
-    
+<div class="page-header">
+   <small>已完成</small>
+</div>
     <table  class="table table-hover table-striped">	
     	 	<thead>
                 <tr>
@@ -20,8 +21,12 @@
 		<th><%= fs.end_time%></th>
 		<td></td> 
 	</tr> 
-	<%end%>   
+	<%end%> 
+
 	</tbody>
 </table>
+<%= will_paginate @all_finished_assignments %>  
+
+
 </div>
 <%= render 'users/user_info'%>

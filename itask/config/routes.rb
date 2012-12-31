@@ -12,6 +12,9 @@ Itask::Application.routes.draw do
   match 'manage', :to => 'manage#index'
   match 'attachments/download/:id/:filename', :controller => 'attachments', :action => 'download', :id => /\d+/, :filename => /.*/, :via => :get
   match 'attachments/download/:id', :controller => 'attachments', :action => 'download', :id => /\d+/, :via => :get
+  match 'my/assignments_finished',:controller =>'my',:action =>'assignments_finished',:as=>'my_assignments_finished'
+    match 'my/assignments_unfinished',:controller =>'my',:action =>'assignments_unfinished',:as=>'my_assignments_unfinished'
+
     # The priority is based upon order of creation:
   # first created -> highest priority.
 
