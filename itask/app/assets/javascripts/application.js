@@ -10,10 +10,14 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
+
  //= require ckeditor/init
  //= require jquery
  //= require jquery_ujs
+ //= require_self
  //= require_tree .
+
+
 function showAndScrollTo(id, focus) {
   $('#'+id).show();
   if (focus!=null) {
@@ -21,6 +25,6 @@ function showAndScrollTo(id, focus) {
   }
   $('html, body').animate({scrollTop: $('#'+id).offset().top}, 100);
 }
-$(document).ready(function(){
-	$('.datepicker').datepicker();
-});
+$(document).on("focus", "[data-behaviour~='datepicker']", function(e){
+    $(this).datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true})
+})
