@@ -1,10 +1,7 @@
-ï»¿class AttachmentsController < ApplicationController
-
-require 'zip/zipfilesystem'
-require 'rubygems'
-require 'zip/zip'
-
+class AttachmentsController < ApplicationController
     before_filter :find_attachment ,:except=> :upload
+	
+		
 	def download
 	   @attachment = Attachment.find(params[:id])
 	    file_name = @attachment.user_upload_file_name
@@ -23,14 +20,28 @@ require 'zip/zip'
 	    file_name = @attachment.user_upload_file_name
 		file_url="#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original/#{file_name}"
 		destination = "#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original"
-		folder_name = destination + "/" + file_name[0...file_name.length-4]
-		unzip_file(file_url,destination)#ï¿½ï¿½Ñ¹ï¿½Ä¼ï¿½
-		show_file(folder_name)#ï¿½ï¿½Ê¾ï¿½Ä¼ï¿½
 		
+		folder_name = destination + "/" + file_name[0...file_name.length-4]
+		unzip_file(file_url,destination)#½âÑ¹ÎÄ¼þ
+		
+		@zip_file_name = Array.new
+		@zip_file_type = Array.new
+		@zip_file_degree = Array.new
+		@zip_file_url = Array.new
+		
+		#ÏÔÊ¾ÎÄ¼þ
+		url_root="/system/attachments/user_uploads/#{@attachment.id}/original"+ "/" + file_name[0...file_name.length-4]
+		degree=0
+		show_file(folder_name,url_root,degree)
 
 	end
 	
+	def file
+		
+	end
 	
+	
+
 
 	private 
 	def find_attachment
@@ -38,6 +49,7 @@ require 'zip/zip'
 		# Show 404 if the filename in the url is wrong
     	raise ActiveRecord::RecordNotFound if params[:filename] && params[:filename] != @attachment.user_upload_file_name
 	end
+
 	
 	def unzip_file (file, destination)
 		Zip::ZipFile.open(file) {|zip_file|
@@ -49,11 +61,39 @@ require 'zip/zip'
 		}
 	end 
 	
-	def show_file(folder_url)
-		Dir.foreach(folder_url){|file|
-			
-		}
+	def show_file(current_folder,current_url,i)
+	
+		last_degree = i
+		
+		stored_url=current_url
+		Dir.foreach(current_folder) do |f|
+			next if f == '.' or f == '..'
+				
+				i = i+1
+				
+				
+				if f.include?"."
+					@zip_file_name.push(f)
+					@zip_file_type.push("file")
+					current_url=stored_url+"/"+f
+					@zip_file_url.push(current_url)
+					@zip_file_degree.push(last_degree)
+					
+				else
+					@zip_file_name.push(f)
+					@zip_file_type.push("folder")
+					@zip_file_url.push(current_url)
+					current_folder=current_folder+"/"+f
+					current_url=current_url+"/"+f
+					@zip_file_degree.push(last_degree)
+					show_file(current_folder,current_url,i)
+				end
+				
+					
+				
+		end
 	end
+	
 	
 
 

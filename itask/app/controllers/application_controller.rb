@@ -31,6 +31,9 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     render 404
   end
+  
+  def file_or_folder
+  end
 
 
 end

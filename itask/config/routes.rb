@@ -12,6 +12,7 @@ Itask::Application.routes.draw do
   match 'manage', :to => 'manage#index'
   match 'attachments/download/:id/:filename', :controller => 'attachments', :action => 'download', :id => /\d+/, :filename => /.*/, :via => :get
   match 'attachments/download/:id', :controller => 'attachments', :action => 'download', :id => /\d+/, :via => :get
+
     # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,6 +53,7 @@ Itask::Application.routes.draw do
   resources :attachments  do
       member do
         get 'download'
+		get 'file'
       end
   end
   # Sample resource route with options:
