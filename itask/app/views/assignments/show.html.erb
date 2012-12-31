@@ -1,24 +1,26 @@
+<%= render "layouts/course_year_menu"%>
+<div class="hero-unit">
+<h2><%=  @assignment.title %></h2>
+<p>作业描述:<%=  raw @assignment.desp %></p>
 
-
+</div>
 <div class="contextual">
 <%= link_to("上传作业",
-            new_assignment_student_course_assignment_path(@assignment), 
+            new_assignment_student_course_assignment_path(@assignment), :class=>"btn",
             :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment %>
 </div>
 
-<div id="add-studnet-assignment" style="display:none;">
+<div id="add-studnet-assignment" class="hero-unit" style="display:none;">
 <h2><%= "上传作业"%></h2>
 
 <%= form_for @sca, :url => assignment_student_course_assignments_path(@assignment),
                                            :html => { :id => 'student-assignment-form', :multipart => true } do |f| %>
 <%= render :partial => 'student_course_assignments/form', :locals => { :f => f } %>
-<%= submit_tag "创建" %>
+<%= submit_tag "上传" ,:class => "btn" %>
 
 <%= link_to "取消", "#", :onclick => '$("#add-studnet-assignment").hide()' %>
 <% end%>
 </div>
-<h2><%=  @assignment.title %></h2>
-<p><%=  raw @assignment.desp %></p>
 <%= render :partial=> 'student_course_assignments/student_assignments',
 :locals => { :studentCourseAssignments => @assignment.student_course_assignments } %>
 

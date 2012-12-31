@@ -1,22 +1,23 @@
 class AssignmentsController < ApplicationController
-	before_filter :find_course_year_by_course_year_id, :only => [:new, :create,:index]
-	
+	before_filter :find_course_year_by_course_year_id
+	before_filter :find_assignment_by_id,:only => [:show]
+	before_filter :initialize_breadcrumb ,:except => :index
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
 		@assignments = @course_year.assignments
-
+		drop_breadcrumb("Courses", course_years_path)
+    	drop_breadcrumb(@course_year.course.name)
 	end
 	
 	def edit
 	end
 	
 	def show_by_course
-		@course_year = CourseYear.find(params[:id])
 		@assignments = @course_year.assignments
 	end 
 
 	def show
-	@assignment = Assignment.find(params[:id])
+	
     
     @unfinish_students =  @assignment.unfinished_students
 
@@ -54,4 +55,13 @@ class AssignmentsController < ApplicationController
       	end
     end
 	end
+	def find_assignment_by_id
+		@assignment = Assignment.find(params[:id])
+
+	end
+  	def initialize_breadcrumb
+     	drop_breadcrumb("Courses", course_years_path)
+    	drop_breadcrumb(@course_year.course.name,course_year_path(@course_year))
+        drop_breadcrumb(@assignment.title)
+  	end
 end

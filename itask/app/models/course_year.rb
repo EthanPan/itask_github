@@ -2,7 +2,7 @@ class CourseYear < ActiveRecord::Base
 	resourcify
   attr_accessible :year, :semester, :course_id, :notice 
   belongs_to :course
-  has_many   :assignments
+  has_many   :assignments ,:dependent => :destroy
   has_many   :user_course_years
   has_many   :users, :through => :user_course_years
   has_many   :assistants

@@ -1,8 +1,8 @@
 class Assignment < ActiveRecord::Base
   resourcify
   attr_accessible :title, :desp, :end_time,:course_year_id,:user_id, :status
-  has_many :student_course_assignments
-  has_many :events         
+  has_many :student_course_assignments 
+  has_many :events ,:dependent => :destroy
   belongs_to :course_year
   belongs_to :user
   

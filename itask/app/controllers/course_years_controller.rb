@@ -1,13 +1,16 @@
 class CourseYearsController < ApplicationController
+  before_filter :find_course_year_by_id ,:except => :index
+  before_filter :initialize_breadcrumb ,:except => :index
+
+
   def index
     @course_years = CourseYear.all    
   end
   def edit
-  	@course_year = CourseYear.find(params[:id])
+
   end
   def show
-    @course_year = CourseYear.find(params[:id])
-
+    
   end
   def manage
     @course_year = CourseYear.find(params[:id])
@@ -15,17 +18,17 @@ class CourseYearsController < ApplicationController
 
 
   def apply
-    @course_year = CourseYear.find(params[:id])
+
     current_user.apply_for_course(params[:id])
     redirect_to course_year_path(@course_year)
   end
   def remove_student
-    @course_year = CourseYear.find(params[:id])
+
     current_user.remove_from_course_year(params[:id])
     redirect_to course_year_path(@course_year)
   end
   def approve_application
-    @course_year = CourseYear.find(params[:id])
+
     current_user.attend_to_course(params[:id])
     redirect_to course_year_path(@course_year)
   end
@@ -43,5 +46,16 @@ class CourseYearsController < ApplicationController
         format.json { render json: @course_year.errors, status: :unprocessable_entity }
       end
     end
+  end
+  private
+  def find_course_year_by_id
+    @course_year = CourseYear.find(params[:id])
+  end
+  
+  def initialize_breadcrumb
+
+    drop_breadcrumb("Courses", course_years_path)
+    drop_breadcrumb(@course_year.course.name)
+
   end
 end

@@ -15,7 +15,7 @@
 		<td><%= a.title %></td> 
 		<td><%= raw a.desp %></td> 
 		<td><%= a.user.name %></td> 
-		<td><%= link_to "view details" ,assignment_path(a)%></td> 
+		<td><%= link_to "view details" ,course_year_assignment_path(@course_year,a)%></td> 
 	</tr> 
 	<%end%>   
 	</tbody>
