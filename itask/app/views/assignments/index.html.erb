@@ -13,7 +13,7 @@
 	<% @assignments.each do |a| %>     
 	<tr>  
 		<td><%= a.title %></td> 
-		<td><%= a.desp %></td> 
+		<td><%= raw a.desp %></td> 
 		<td><%= a.user.name %></td> 
 		<td><%= link_to "view details" ,assignment_path(a)%></td> 
 	</tr> 
