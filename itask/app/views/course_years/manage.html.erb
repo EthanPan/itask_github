@@ -1,11 +1,11 @@
 <%= render "layouts/course_year_menu"%>
-<ul class="nav nav-tabs">
-  <li class="active">
-    <a href="#">学生</a>
-  </li>
-  <li><a href="#">配置</a></li>
-</ul>
-<table  class="table table-hover table-striped">                        
+<div class="container-fluid">
+  <div class="row-fluid">
+<div class="span8 hero-unit">
+	<div class="page-header">
+  <h4>选课学生<span class="divider"></h4>
+</div>
+	<table  class="table table-hover table-striped">                        
 	<thead>
                 <tr>
                   <th>学号</th>
@@ -42,3 +42,35 @@
 	<%end%>   
 	</tbody>
 </table>
+</div>
+<div class="span4 hero-unit">
+<div class="page-header">
+  <h4>助教<span class="divider"></h4>
+</div>
+		<table  class="table table-hover table-striped">                        
+	<thead>
+                <tr>
+                  <th>学号</th>
+                  <th>姓名</th>
+                  
+                  <th>操作</th>
+                </tr>
+  </thead> 
+  <tbody> 
+   <% @course_year.assistants.each do |a| %>     
+	<tr>  
+		<td><%= a.user.user_num %></td> 
+		<td><%= a.user.name %></td>		
+         <td><%= link_to "移除",course_year_assistant_path(@course_year,a),:method => "delete"%></td>
+	</tr> 
+	<%end%>   
+	</tbody>
+</table>
+	<p>添加助教</p>
+    <%= form_tag course_year_assistants_path(@course_year),:method => "post" do %>
+	<%= text_field_tag :user_num%>
+	<%= submit_tag "添加"%>
+	<%end%>
+	</div>
+</div>
+</div>

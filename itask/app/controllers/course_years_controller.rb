@@ -12,6 +12,8 @@ class CourseYearsController < ApplicationController
   def manage
     @course_year = CourseYear.find(params[:id])
   end
+
+
   def apply
     @course_year = CourseYear.find(params[:id])
     current_user.apply_for_course(params[:id])

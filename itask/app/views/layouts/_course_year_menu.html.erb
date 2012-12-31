@@ -8,5 +8,5 @@
 <%= render_list :class => "nav nav-tabs" do |li|
      li << link_to( "课程首页", course_year_path(@course_year))
      li << link_to("作业", course_year_assignments_path(@course_year) ) 
-     li << link_to("管理", manage_course_year_path(@course_year)) if user_signed_in?&&current_user.has_role?(:teacher)             
+     li << link_to("管理", manage_course_year_path(@course_year)) if user_signed_in?&&current_user.has_role?(:teacher)|| current_user.has_role?(:TA)            
 end %>

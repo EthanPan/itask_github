@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     	@user = User.find(params[:id])   	
     	@all_finished_assignments = @user.all_finished_assignments.paginate(:page => params[:page])
 
-    	@all_unfinished_assignments = @user.all_unfinished_assignments.paginate(:page => params[:page],:per_page=>1)
+    	@all_unfinished_assignments = @user.all_unfinished_assignments.paginate(:page => params[:page],:per_page=>10)
     end
     def courses
     	@user = User.find(params[:id])
