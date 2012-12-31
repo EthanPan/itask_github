@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   def add_event_info(assign,action,object)
     @event = Event.new
     @event.assignment = assign
-    @event.operator = current_user.id
+    if current_user != nil 
+      @event.operator = current_user.id
+    end
     @event.action = action
     @event.object = object.id
     @event.save

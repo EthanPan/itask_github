@@ -57,6 +57,9 @@ GEM
       thor
     builder (3.0.4)
     cancan (1.6.8)
+    ckeditor (3.7.3)
+      mime-types
+      orm_adapter
     cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -178,6 +181,7 @@ DEPENDENCIES
   bootstrap-sass (~> 2.2.1.1)
   bootstrap_helper
   cancan
+  ckeditor (~> 3.7.3)
   coffee-rails (~> 3.2.1)
   devise
   gravtastic
@@ -190,4 +194,3 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
-  will_paginate (~> 3.0)
