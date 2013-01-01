@@ -16,6 +16,7 @@ class Ability
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:course=>{:user => user}}
       can :destroy, StudentCourseAssignment,:assignment=>{:course_year => { :course=>{:user=>user} }}
+      can :grade ,StudentCourseAssignment
       basic_read_only
     elsif user.has_role? :TA
       can :manage, CourseYear, :assistants => {:user => user} 
@@ -23,6 +24,7 @@ class Ability
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:assistants => {:user => user}}
       can :create, StudentCourseAssignment 
+            can :grade ,StudentCourseAssignment
 
       can :manage, StudentCourseAssignment,:user => user
 
