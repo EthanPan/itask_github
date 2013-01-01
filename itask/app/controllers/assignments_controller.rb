@@ -20,9 +20,9 @@ class AssignmentsController < ApplicationController
 	def show
 	
     
-    @unfinish_students =  @assignment.unfinished_students
-
-    respond_to do |format|
+        @unfinish_students =  @assignment.unfinished_students.paginate(:page => params[:page],:per_page=>10)
+        @finish_student_course_assignments = @assignment.student_course_assignments.paginate(:page => params[:page],:per_page=>10)
+       respond_to do |format|
         format.html {
         @sca = StudentCourseAssignment.new 
         @sca.attachments.build

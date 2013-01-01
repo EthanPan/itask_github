@@ -1,4 +1,5 @@
 class AssistantsController < ApplicationController
+	load_and_authorize_resource
 	def destroy
 		@assistant = Assistant.find(params[:id])
 		@course_year = CourseYear.find(params[:course_year_id])

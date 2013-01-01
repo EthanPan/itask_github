@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
     before_filter :find_attachment ,:except=> :upload
-	
+	load_and_authorize_resource
 	require 'zip/zip'
 	require 'zip/zipfilesystem'
 		
