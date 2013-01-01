@@ -23,13 +23,17 @@
 		<td><%=sta.created_at%></td> 
 		<th><% if !sta.attachments.blank? %>
 			    <% sta.attachments.each do |a| %>
-			    	<%= link_to_attachment a ,:download=>true%>
+			    	<% if sta.assignment.status == 1||can?(:manage,@assignment)  %>
+			    	<%= link_to_attachment a ,:download=>true %>
+			    	<% else %>
+			    	<%= a.user_upload_file_name%>
+			    	<% end %>
 			    <%end%>
 		   <%end%></th>
 		<td>
 		 <% sta.attachments.each do |a| %>
-			<%= link_to "查看", a.user_upload.url(:original, false), :title => "Show", :target => "_blank" %>
-			<%= link_to "查看测试", attachment_path(a), :target => "_blank" %>
+			<%= link_to "查看", a.user_upload.url(:original, false), :title => "Show", :target => "_blank"  if sta.assignment.status == 1|| can?(:manage,@assignment) %>
+			<%= link_to "查看测试", attachment_path(a), :target => "_blank" if sta.assignment.status == 1||can?(:manage,@assignment) %>
 		 <%end%>
 
 		    <%= link_to "抄袭检测", :controller => "cheatcheck", :action => "checkresult", :id => sta if can?(:manage,@assignment) if can?(:grade,sta)%>

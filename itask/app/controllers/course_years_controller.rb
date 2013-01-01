@@ -41,7 +41,7 @@ class CourseYearsController < ApplicationController
     respond_to do |format|
 
       if @course_year.update_attributes(params[:course_year])
-        format.html { redirect_to course_year_assignments_path(@course_year), notice: 'Notice was successfully updated.' }
+        format.html { redirect_to course_year_path(@course_year), notice: 'Notice was successfully updated.' }
 
         format.json { head :no_content }
       else

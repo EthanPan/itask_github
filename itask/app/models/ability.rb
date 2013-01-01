@@ -13,6 +13,8 @@ class Ability
     elsif user.has_role? :teacher
       can :manage, CourseYear, :course => {:user => user }
       can :manage, Assignment, :course_year => {:course => {:user => user }}
+      can :create,  Assistant
+      can :destroy, Assistant,:course_year => {:course => {:user => user }}
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:course=>{:user => user}}
       can :destroy, StudentCourseAssignment,:assignment=>{:course_year => { :course=>{:user=>user} }}
