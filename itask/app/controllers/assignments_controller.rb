@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
 	before_filter :find_course_year_by_course_year_id
-	before_filter :find_assignment_by_id,:only => [:show,:unfinished]
+	before_filter :find_assignment_by_id,:only => [:show,:edit,:update,:unfinished]
 	before_filter :initialize_breadcrumb ,:except => [:index,:new,:create]
 	load_and_authorize_resource
 	skip_authorize_resource :only => [:new,:create]
@@ -13,6 +13,24 @@ class AssignmentsController < ApplicationController
 	end
 	
 	def edit
+	end
+
+	def update
+		@assignment = Assignment.find(params[:id])
+		respond_to do |format|
+
+      	if @assignment.update_attributes(params[:assignment])
+          if @assignment.end_time > Time.now.to_date
+            @assignment.status = 0
+            @assignment.save
+          end
+        	format.html { redirect_to course_year_assignment_path(@assignment.course_year,@assignment), notice: 'Assignemnt was successfully updated.' }
+        	format.json { head :no_content }
+      	else
+        	format.html { render action: "edit" }
+        	format.json { render json: @assignment.errors, status: :unprocessable_entity }
+      	end
+    	end
 	end
 	
 	def show_by_course

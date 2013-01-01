@@ -6,6 +6,7 @@
 
 <div class="contextual">
 	<% if user_signed_in? %>
+<%= link_to "更新作业", edit_course_year_assignment_path(@assignment.course_year,@assignment),class:"btn" if can? :manage,@assignment %>
 <%= link_to("上传作业",
             new_assignment_student_course_assignment_path(@assignment), :class=>"btn",
             :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment&& current_user.has_a_course_year(@assignment.course_year) %>

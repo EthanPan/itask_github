@@ -1,0 +1,36 @@
+<%= form_for(@assignment) do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assignment.errors.count, "error") %> prohibited this Assignment from being saved:</h2>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>Edit assignment</h1>
+
+<%= form_for @assignment,:url => course_year_assignment_path(@assignment.course_year,@assignment) do |f| %>
+
+  <div class="field">
+    <%= f.label :作业标题 %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :作业描述 %><br />
+    <%= f.cktext_area :desp %>
+  </div>
+  <div class="field">
+    <%= f.label :截止时间 %><br />
+    <%= f.text_field :end_time, 'data-behaviour' => 'datepicker' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Update"%>
+  </div>
+<% end %>
+
+<%= link_to 'Back', course_year_assignment_path(@assignment.course_year,@assignment) %>
