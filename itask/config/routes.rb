@@ -12,7 +12,7 @@ Itask::Application.routes.draw do
   match 'manage', :to => 'manage#index'
   match 'attachments/download/:id/:filename', :controller => 'attachments', :action => 'download', :id => /\d+/, :filename => /.*/, :via => :get
   match 'attachments/download/:id', :controller => 'attachments', :action => 'download', :id => /\d+/, :via => :get
-
+  
   match 'my/assignments_finished',:controller =>'my',:action =>'assignments_finished',:as=>'my_assignments_finished'
   match 'my/assignments_unfinished',:controller =>'my',:action =>'assignments_unfinished',:as=>'my_assignments_unfinished'
 
@@ -44,7 +44,11 @@ Itask::Application.routes.draw do
       get 'manage'
 
     end
-     resources :assignments
+     resources :assignments do
+     member do
+       get 'unfinished'
+    end
+  end
        resources :assistants
   end
   resources :user_course_years do
@@ -53,10 +57,13 @@ Itask::Application.routes.draw do
     end
   end
   resources :assignments do
+ 
+
      resources :student_course_assignments do
-		member do 
+		 member do 
 		  get 'grade'
 		  put 'grade'
+
 		end
 	 end
 

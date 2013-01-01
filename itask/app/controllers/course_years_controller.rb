@@ -15,6 +15,8 @@ class CourseYearsController < ApplicationController
   end
   def manage
     @course_year = CourseYear.find(params[:id])
+    @user_course_years = @course_year.user_course_years.paginate(:page => params[:page],:per_page=>10)
+    @assistants =  @course_year.assistants.paginate(:page => params[:page],:per_page=>10)
   end
 
 

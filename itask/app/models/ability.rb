@@ -22,12 +22,15 @@ class Ability
       can :manage, Assignment, :user => user 
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:assistants => {:user => user}}
+      can :create, StudentCourseAssignment 
+
       can :manage, StudentCourseAssignment,:user => user
 
       basic_read_only
     elsif user.has_role? :student
       can :manage, User ,:id => user.id  
       can :manage, StudentCourseAssignment,:user => user
+      can :create, StudentCourseAssignment 
       cannot :grade, StudentCourseAssignment
       basic_read_only
     else
@@ -62,7 +65,7 @@ class Ability
       can :apply,CourseYear
       can :read,User
       can :read,Assignment
-      
+      can :unfinished,Assignment
       can :read,Event
 
     end

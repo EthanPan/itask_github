@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
 	before_filter :find_course_year_by_course_year_id
-	before_filter :find_assignment_by_id,:only => [:show]
+	before_filter :find_assignment_by_id,:only => [:show,:unfinished]
 	before_filter :initialize_breadcrumb ,:except => [:index,:new,:create]
 	load_and_authorize_resource
 	skip_authorize_resource :only => [:new,:create]
@@ -16,13 +16,21 @@ class AssignmentsController < ApplicationController
 	end
 	
 	def show_by_course
-		@assignments = @course_year.assignments
+		@assignments = @course_year.assignments.paginate(:page => params[:page],:per_page=>10)
 	end 
-
+    def unfinished
+    	@unfinish_students =  @assignment.unfinished_students.paginate(:page => params[:page],:per_page=>10)
+    	 respond_to do |format|
+        format.html {
+        @sca = StudentCourseAssignment.new 
+        @sca.attachments.build
+        # @sca.attachments.build
+        }
+    end
+    end
 	def show
 	
     
-        @unfinish_students =  @assignment.unfinished_students.paginate(:page => params[:page],:per_page=>10)
         @finish_student_course_assignments = @assignment.student_course_assignments.paginate(:page => params[:page],:per_page=>10)
         respond_to do |format|
         format.html {

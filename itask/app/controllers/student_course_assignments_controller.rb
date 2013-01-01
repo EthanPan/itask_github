@@ -1,8 +1,10 @@
 class StudentCourseAssignmentsController < ApplicationController
-	load_and_authorize_resource 
+	load_and_authorize_resource :except=>:new
+    
     def index
-    	@sca = StudentCourseAssignment.all
+    	@scas = StudentCourseAssignment.all.paginate(:page => params[:page],:per_page=>10)
     end
+
 	def new
 		@sca = StudentCourseAssignment.new
 		@sca.attachments.build
@@ -27,7 +29,7 @@ class StudentCourseAssignmentsController < ApplicationController
 			flash[:alert] = "fail"
 			redirect_to course_year_assignment_path(@assignment.course_year,@assignment)
 		end
-
+        
 	end
     def destroy
     	
