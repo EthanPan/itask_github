@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   
   protect_from_forgery
-  
+  require 'will_paginate/array'
   # before_filter :find_current_user
   # before_filter :authenticate_user!
   def is_manager

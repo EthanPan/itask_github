@@ -1,7 +1,12 @@
  <%= render_breadcrumb %>
 <div class="page-header">
   <h1><%= @course_year.course.name %> <small>老师:<%= @course_year.course.user.name%></small></h1>
+ </br>
+<% if user_signed_in?  %>
+   <%= link_to '申请加入该课程',apply_course_year_path(@course_year),:class => 'btn' if !@course_year.has_a_student(current_user.id)&& cannot?(:manage ,@course_year)&& !current_user.has_role?(:teacher)%>
+<% end %>
 </div>
+
 <%= render_list :class => "nav nav-tabs" do |li|
      li << link_to( "课程首页", course_year_path(@course_year))
      li << link_to("作业", course_year_assignments_path(@course_year) ) 

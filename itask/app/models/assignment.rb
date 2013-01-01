@@ -11,8 +11,15 @@ class Assignment < ActiveRecord::Base
 
   def unfinished_students
 
-  	all_students = User.joins(:user_course_years => :course_year).where(:course_years =>{ :id => self.course_year_id},:user_course_years => {:status => 1})    
-    
+  	all_students = User.joins(:user_course_years => :course_year).where(:course_years =>{ :id => self.course_year_id},:user_course_years => {:status => 1})
+    finish_students = finished_students
+  
+    if !finish_students.blank?
+         all_students - finish_students
+    else
+         all_students
+    end
+    #all_students.where(:id => finish_student_ids).delete_all
   	# student_course_assignments = self.student_course_assignments
     # finish_students = Array.new
 
@@ -25,7 +32,8 @@ class Assignment < ActiveRecord::Base
   end
 
   def finished_students
-      User.joins(:student_course_assignments => :assignments).where(:assignments => {:id => self.id})     
+     
+      User.joins(:student_course_assignments => :assignment).where(:assignments => {:id => self.id}) 
      #    Assignment.joins(:student_course_assignments => :user).where(:student_course_assignments => {:user_id => self.id})    
 
      #    student_course_assignments = self.student_course_assignments
