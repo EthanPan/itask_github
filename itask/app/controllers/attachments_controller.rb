@@ -20,21 +20,27 @@ class AttachmentsController < ApplicationController
 	def show
 		@attachment = Attachment.find(params[:id])
 	    file_name = @attachment.user_upload_file_name
-		file_url="#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original/#{file_name}"
-		destination = "#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original"
+		file_type_bool = file_name[-4..-1]
+		if file_type_bool == ".zip"
 		
-		folder_name = destination + "/" + file_name[0...file_name.length-4]
-		unzip_file(file_url,destination)#解压文件
+			file_url="#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original/#{file_name}"
+			destination = "#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original"
+			
+			folder_name = destination + "/" + file_name[0...file_name.length-4]
+			unzip_file(file_url,destination)#解压文件
 		
-		@zip_file_name = Array.new
-		@zip_file_type = Array.new
-		@zip_file_degree = Array.new
-		@zip_file_url = Array.new
+			@zip_file_name = Array.new
+			@zip_file_type = Array.new
+			@zip_file_degree = Array.new
+			@zip_file_url = Array.new
 		
-		#显示文件
-		url_root="/system/attachments/user_uploads/#{@attachment.id}/original"+ "/" + file_name[0...file_name.length-4]
-		degree=0
-		show_file(folder_name,url_root,degree)
+			#显示文件
+			url_root="/system/attachments/user_uploads/#{@attachment.id}/original"+ "/" + file_name[0...file_name.length-4]
+			degree=0
+			show_file(folder_name,url_root,degree)
+		else
+			redirect_to @attachment.user_upload.url(:original,false)
+		end
 
 	end
 	
