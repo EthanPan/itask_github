@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
 	before_filter :find_course_year_by_course_year_id
 	before_filter :find_assignment_by_id,:only => [:show]
-	before_filter :initialize_breadcrumb ,:except => :index
+	before_filter :initialize_breadcrumb ,:except => [:index,:new]
 	load_and_authorize_resource
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
@@ -34,6 +34,9 @@ class AssignmentsController < ApplicationController
 
 	def new
 		@assignment = Assignment.new
+		drop_breadcrumb("Courses", course_years_path)
+    	drop_breadcrumb(@course_year.course.name,course_year_path(@course_year))
+    	drop_breadcrumb("New Assignment")
 			
 	end
 

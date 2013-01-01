@@ -8,8 +8,8 @@ en:
       already_confirmed: "已验证，请登录"
       not_locked: "未被锁定"
       not_saved:
-        one: "有 1 个错误发生导致「%{model}」无法被保存:"
-        other: "有 %{count} 个错误发生导致「%{model}」无法被保存:"
+        one: "有 1 个错误发生导致 %{resource} 无法被保存:"
+        other: "有 %{count} 个错误发生导致 %{resource} 无法被保存:"
 
   devise:
     failure:

@@ -2,7 +2,8 @@ class AssistantsController < ApplicationController
 	def destroy
 		@assistant = Assistant.find(params[:id])
 		@course_year = CourseYear.find(params[:course_year_id])
-		if @assistant.destroy
+
+		if @assistant.remove_a
 			flash[:success] = "remove assistant successfully"
 	    else
 	    	flash[:alert] ="remove fail!"

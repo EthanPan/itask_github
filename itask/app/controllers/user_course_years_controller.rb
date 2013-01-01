@@ -1,6 +1,16 @@
 class UserCourseYearsController < ApplicationController
 	def create
-
+      @user = User.where(:user_num => params[:user_num]).first
+      @course_year = CourseYear.find(params[:course_year_id])
+      if !@user.blank?
+      	@user_course_year = UserCourseYear.new(:user=>@user,:course_year => @course_year,:status=>1)
+        if @user_course_year.save
+         flash[:success] ="success!"
+      	end
+      else
+      	flash[:alert] = "fail!"
+      end
+      redirect_to manage_course_year_path(@course_year)
 	end
 
 	def edit

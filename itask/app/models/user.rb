@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
   end
 
   def has_a_course_year(course_year_id)
-    UserCoursetYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
+    UserCourseYear.where(:course_year_id =>course_year_id,:user_id => self.id,:status => 1).first
   end
   def attend_to_course(course_year_id)
     if @student_course_year = UserCourseYear.where(:course_year_id =>course_year_id,:user_id => self.id).first
@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
       end
       @student_course_year = @course_year.user_course_years.build(:status => 0)
       @student_course_year.user = self
+      self.add_role :student
       @student_course_year.save
     end
   end

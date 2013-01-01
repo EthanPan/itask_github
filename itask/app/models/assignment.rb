@@ -11,26 +11,30 @@ class Assignment < ActiveRecord::Base
 
   def unfinished_students
 
+  	all_students = User.joins(:user_course_years => :course_year).where(:course_years =>{ :id => self.course_year_id},:user_course_years => {:status => 1})    
+    
+  	# student_course_assignments = self.student_course_assignments
+    # finish_students = Array.new
 
-  	student_course_assignments = self.student_course_assignments
-    finish_students = Array.new
+	  #   student_course_assignments.each do |sca|
+	  #        finish_students.push(sca.user)
+	  #   end
 
-	    student_course_assignments.each do |sca|
-	         finish_students.push(sca.user)
-	    end
-
-    students = self.course_year.active_students
-    students - finish_students
+   #  students = self.course_year.active_students
+   #  students - finish_students
   end
 
   def finished_students
-        student_course_assignments = self.student_course_assignments
-        finish_students = Array.new
+      User.joins(:student_course_assignments => :assignments).where(:assignments => {:id => self.id})     
+     #    Assignment.joins(:student_course_assignments => :user).where(:student_course_assignments => {:user_id => self.id})    
 
-	    student_course_assignments.each do |sca|
-	         finish_students.push(sca.user)
-	    end
-	    finish_students
+     #    student_course_assignments = self.student_course_assignments
+     #    finish_students = Array.new
+
+	    # student_course_assignments.each do |sca|
+	    #      finish_students.push(sca.user)
+	    # end
+	    # finish_students
   end
   def has_a_finished_student(user)
         student_course_assignments = self.student_course_assignments

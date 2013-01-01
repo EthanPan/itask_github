@@ -7,7 +7,7 @@
 <div class="contextual">
 <%= link_to("上传作业",
             new_assignment_student_course_assignment_path(@assignment), :class=>"btn",
-            :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment %>
+            :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment&& current_user.has_a_course_year(@assignment.course_year) %>
 </div>
 
 <div id="add-studnet-assignment" class="hero-unit" style="display:none;">

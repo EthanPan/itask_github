@@ -42,6 +42,14 @@
 	<%end%>   
 	</tbody>
 </table>
+<div>
+<span><label>添加学生</label>
+    <%= form_tag user_course_years_path,:method => "post" do %>
+	<%= text_field_tag :user_num%>
+	<%= hidden_field_tag "course_year_id",@course_year.id %>
+	<%= submit_tag "添加"%>
+	<%end%></span>
+	</div>
 </div>
 <div class="span4 hero-unit">
 <div class="page-header">

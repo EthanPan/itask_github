@@ -1,5 +1,5 @@
 class StudentCourseAssignmentsController < ApplicationController
-	
+	load_and_authorize_resource 
     def index
     	@sca = StudentCourseAssignment.all
     end
