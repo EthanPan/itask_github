@@ -31,9 +31,10 @@
 			<%= link_to "查看", a.user_upload.url(:original, false), :title => "Show", :target => "_blank" %>
 			<%= link_to "查看测试", attachment_path(a), :target => "_blank" %>
 		 <%end%>
+
+		    <%= link_to "抄袭检测", :controller => "cheatcheck", :action => "checkresult", :id => sta %>
 			<%= link_to "评分", grade_assignment_student_course_assignment_path(@assignment,sta), :target => "_blank" %>
-			<%= link_to "删除", student_course_assignment_path(sta),:method => "delete"%>
-			
+			<%= link_to "删除", student_course_assignment_path(sta),:method => "delete"%>			
 			
 		</td> 
 					
