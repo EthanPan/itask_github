@@ -1,4 +1,4 @@
-class AttachmentsController < ApplicationController
+锘縞lass AttachmentsController < ApplicationController
     before_filter :find_attachment ,:except=> :upload
 	load_and_authorize_resource
 	require 'zip/zip'
@@ -27,14 +27,15 @@ class AttachmentsController < ApplicationController
 			destination = "#{Rails.root}/public/system/attachments/user_uploads/#{@attachment.id}/original"
 			
 			folder_name = destination + "/" + file_name[0...file_name.length-4]
-			unzip_file(file_url,destination)#解压文件
+
+		unzip_file(file_url,destination)
 		
 			@zip_file_name = Array.new
 			@zip_file_type = Array.new
 			@zip_file_degree = Array.new
 			@zip_file_url = Array.new
 		
-			#显示文件
+			#锟斤拷示锟侥硷拷
 			url_root="/system/attachments/user_uploads/#{@attachment.id}/original"+ "/" + file_name[0...file_name.length-4]
 			degree=0
 			show_file(folder_name,url_root,degree)

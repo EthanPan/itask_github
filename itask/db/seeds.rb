@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+['teacher','student','TA'].each do |role|
+	if !Role.where(:name => role)
+ 		 Role.create({ :name => role }, :without_protection => true)
+ 	end
+end

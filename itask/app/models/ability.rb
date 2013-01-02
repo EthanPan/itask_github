@@ -12,16 +12,21 @@ class Ability
       can :manage, :all
     elsif user.has_role? :teacher
       can :manage, CourseYear, :course => {:user => user }
-      can :manage, Assignment, :course => {:user => user }
+      can :manage, Assignment, :course_year => {:course => {:user => user }}
+      can :create,  Assistant
+      can :destroy, Assistant,:course_year => {:course => {:user => user }}
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:course=>{:user => user}}
       can :destroy, StudentCourseAssignment,:assignment=>{:course_year => { :course=>{:user=>user} }}
+      can :grade ,StudentCourseAssignment
       basic_read_only
     elsif user.has_role? :TA
       can :manage, CourseYear, :assistants => {:user => user} 
       can :manage, Assignment, :user => user 
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:assistants => {:user => user}}
+      can :create, StudentCourseAssignment 
+            can :grade ,StudentCourseAssignment
 
       can :manage, StudentCourseAssignment,:user => user
 
@@ -29,6 +34,8 @@ class Ability
     elsif user.has_role? :student
       can :manage, User ,:id => user.id  
       can :manage, StudentCourseAssignment,:user => user
+      can :create, StudentCourseAssignment 
+      cannot :grade, StudentCourseAssignment
       basic_read_only
     else
       basic_read_only
@@ -62,6 +69,7 @@ class Ability
       can :apply,CourseYear
       can :read,User
       can :read,Assignment
+      can :unfinished,Assignment
       can :read,Event
 
     end

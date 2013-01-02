@@ -1,8 +1,10 @@
 class AssignmentsController < ApplicationController
 	before_filter :find_course_year_by_course_year_id
-	before_filter :find_assignment_by_id,:only => [:show]
-	before_filter :initialize_breadcrumb ,:except => [:index,:new]
+	before_filter :find_assignment_by_id,:only => [:show,:edit,:update,:unfinished]
+	before_filter :initialize_breadcrumb ,:except => [:index,:new,:create]
 	load_and_authorize_resource
+	skip_authorize_resource :only => [:new,:create]
+
 	def index
 		#@courseyear = CourseYear.find(params[:course_year_id])
 		@assignments = @course_year.assignments
@@ -12,17 +14,43 @@ class AssignmentsController < ApplicationController
 	
 	def edit
 	end
+
+	def update
+		@assignment = Assignment.find(params[:id])
+		respond_to do |format|
+
+      	if @assignment.update_attributes(params[:assignment])
+          if @assignment.end_time > Time.now.to_date
+            @assignment.status = 0
+            @assignment.save
+          end
+        	format.html { redirect_to course_year_assignment_path(@assignment.course_year,@assignment), notice: 'Assignemnt was successfully updated.' }
+        	format.json { head :no_content }
+      	else
+        	format.html { render action: "edit" }
+        	format.json { render json: @assignment.errors, status: :unprocessable_entity }
+      	end
+    	end
+	end
 	
 	def show_by_course
-		@assignments = @course_year.assignments
+		@assignments = @course_year.assignments.paginate(:page => params[:page],:per_page=>10)
 	end 
-
+    def unfinished
+    	@unfinish_students =  @assignment.unfinished_students.paginate(:page => params[:page],:per_page=>10)
+    	 respond_to do |format|
+        format.html {
+        @sca = StudentCourseAssignment.new 
+        @sca.attachments.build
+        # @sca.attachments.build
+        }
+    end
+    end
 	def show
 	
     
-        @unfinish_students =  @assignment.unfinished_students.paginate(:page => params[:page],:per_page=>10)
         @finish_student_course_assignments = @assignment.student_course_assignments.paginate(:page => params[:page],:per_page=>10)
-       respond_to do |format|
+        respond_to do |format|
         format.html {
         @sca = StudentCourseAssignment.new 
         @sca.attachments.build
@@ -51,13 +79,14 @@ class AssignmentsController < ApplicationController
 		respond_to do |format|
       	if @assignment.save
       		add_event_info(@assignment,'create assignment',@assignment)
-        	format.html { redirect_to @assignment, notice: 'Assignment was successfully created.' }
+        	format.html { redirect_to course_year_assignment_path(@course_year,@assignment), notice: 'Assignment was successfully created.' }
         	format.json { render json: @assignment, status: :created, location: @assignment }
       	else
         	format.html { render action: "new", notice: 'Imporper attributes' }
         	format.json { render json: @assignment.errors, status: :unprocessable_entity }
       	end
     end
+
 	end
 	def find_assignment_by_id
 		@assignment = Assignment.find(params[:id])

@@ -15,7 +15,7 @@
                 </tr>
   </thead> 
   <tbody> 
-   <% @course_year.user_course_years.each do |uc| %>     
+   <% @user_course_years.each do |uc| %>     
 	<tr>  
 		<td><%= uc.user.user_num %></td> 
 		<td><%= uc.user.name %></td>
@@ -42,6 +42,7 @@
 	<%end%>   
 	</tbody>
 </table>
+<%= will_paginate @user_course_years %> 
 <div>
 <span><label>添加学生</label>
     <%= form_tag user_course_years_path,:method => "post" do %>
@@ -65,7 +66,7 @@
                 </tr>
   </thead> 
   <tbody> 
-   <% @course_year.assistants.each do |a| %>     
+   <% @assistants.each do |a| %>     
 	<tr>  
 		<td><%= a.user.user_num %></td> 
 		<td><%= a.user.name %></td>		
@@ -74,6 +75,7 @@
 	<%end%>   
 	</tbody>
 </table>
+<%= will_paginate @assistants %> 
 	<p>添加助教</p>
     <%= form_tag course_year_assistants_path(@course_year),:method => "post" do %>
 	<%= text_field_tag :user_num%>

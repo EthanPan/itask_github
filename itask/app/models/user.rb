@@ -22,7 +22,10 @@ class User < ActiveRecord::Base
   has_many   :course_years, :through => :user_course_years
   validates_presence_of :user_num,:email
   validates_uniqueness_of :user_num,:email
- 
+  after_create :deafult_role
+  def deafult_role
+    self.add_role :student
+  end
 
   def self.try_to_login(user_num,password)
   	return nil if password.empty?
@@ -59,12 +62,9 @@ class User < ActiveRecord::Base
   def all_unfinished_assignments
       all_assignments = Assignment.joins(:course_year => :users).where(:users => {:id => self.id})
        finished_assignments = all_finished_assignments
-       finished_assignment_ids = Array.new
-       finished_assignments.each do |fa|
-         finished_assignment_ids.push(fa.id)
-       end
+       
        if !finished_assignments.blank?
-           all_assignments.where(:id => finished_assignment_ids).delete_all
+           all_assignments - finished_assignments
        else
            all_assignments
        end

@@ -1,0 +1,51 @@
+<%= render "layouts/course_year_menu"%>
+<div class="hero-unit">
+<h2><%=  @assignment.title %></h2>
+<p>作业描述:<%=  raw @assignment.desp %></p>
+
+
+<div class="contextual">
+	<% if user_signed_in? %>
+<%= link_to("上传作业",
+            new_assignment_student_course_assignment_path(@assignment), :class=>"btn",
+            :onclick => 'showAndScrollTo("add-studnet-assignment", "add-studnet-assignment"); return false;') if @assignment&& current_user.has_a_course_year(@assignment.course_year) %>
+            <% end%>
+</div>
+
+<div id="add-studnet-assignment" class="hero-unit" style="display:none;">
+<h2><%= "上传作业"%></h2>
+
+<%= form_for @sca, :url => assignment_student_course_assignments_path(@assignment),
+                                           :html => { :id => 'student-assignment-form', :multipart => true } do |f| %>
+<%= render :partial => 'student_course_assignments/form', :locals => { :f => f } %>
+<%= submit_tag "上传" ,:class => "btn" %>
+
+<%= link_to "取消", "#", :onclick => '$("#add-studnet-assignment").hide()' %>
+<% end%>
+</div>
+</div>
+<%= render_list :class => "nav nav-tabs" do |li|
+     li << link_to( "已上交", course_year_assignment_path(@assignment.course_year,@assignment))
+     li << link_to("未上交", unfinished_course_year_assignment_path(@assignment.course_year,@assignment) ) 
+end %>
+
+<h3>未上交</h3>
+<table  class="table table-hover table-striped">                        
+	<thead>
+                <tr>
+                  <th>学号</th>
+                  <th>姓名</th>                
+                </tr>
+  </thead> 
+  <tbody> 
+  	
+   <% @unfinish_students.each do |us| %>     
+	<tr>  
+		<td><%= us.user_num %></td> 
+		<td><%= us.name %></td>
+		
+	</tr> 
+	<%end%>   
+	</tbody>
+</table>
+<%= will_paginate @unfinish_students %> 
