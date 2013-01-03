@@ -5,7 +5,7 @@ class CourseYearsController < ApplicationController
 
 
   def index
-    @course_years = CourseYear.all    
+    @course_years = CourseYear.where(:year => params[:year]||"2012-2013",:semester => params[:semester]||"1");   
   end
   def edit
 

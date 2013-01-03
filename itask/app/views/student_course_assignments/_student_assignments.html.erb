@@ -7,6 +7,10 @@
                   <th>学生</th>
                   <th>上交时间</th>
                   <th>附件名称</th>
+                  <% if @assignment.status == 1%>
+
+                   <th>分数</th>
+                   <%end%>
                   <th>操作</th> 
 
                 </tr>
@@ -30,10 +34,15 @@
 			    	<% end %>
 			    <%end%>
 		   <%end%></th>
+		<% if @assignment.status == 1%>
+			<td><%=sta.score%></td>
+				<%end %> 
 		<td>
+			
+		
 		 <% sta.attachments.each do |a| %>
 		 
-			<%= link_to "查看", attachment_path(a), :target => "_blank" %>
+			<%= link_to "查看包", attachment_path(a), :target => "_blank" if sta.assignment.status == 1||can?(:manage,@assignment) %>
 		 <%end%>
 
 		    <%= link_to "抄袭检测", :controller => "cheatcheck", :action => "checkresult", :id => sta if can?(:manage,@assignment) if can?(:grade,sta)%>
