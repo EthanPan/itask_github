@@ -14,6 +14,7 @@ class Ability
       can :manage, CourseYear, :course => {:user => user }
       can :manage, Assignment, :course_year => {:course => {:user => user }}
       can :create,  Assistant
+      can :manage, Attachment, :attachmentable => { :assignment => {:course_year => {:course => {:user => user}}}}
       can :destroy, Assistant,:course_year => {:course => {:user => user }}
       can :manage, User ,:id => user.id 
       can :manage, UserCourseYear,:course_year => {:course=>{:user => user}}

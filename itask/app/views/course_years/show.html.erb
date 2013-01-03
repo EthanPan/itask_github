@@ -1,7 +1,7 @@
 
 
 <%= render "layouts/course_year_menu"%>
-<%= @course_year.notice %>
+<div class="hero-unit"><%= @course_year.notice %></div>
 <br/>
 
 <%= link_to '更新公告', edit_course_year_path(@course_year) ,class:"btn" if can? :manage,@course_year%> 

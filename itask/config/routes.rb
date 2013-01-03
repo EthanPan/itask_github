@@ -5,7 +5,7 @@ Itask::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  root :to => "course_years#index"
+  root :to => "events#index"
   # match 'login', :to => 'devise#sign_in', :as => 'signin'
   # match 'logout', :to => 'devise#logout', :as => 'signout'
   #match 'account/register', :to => 'account#register', :via => [:get, :post], :as => 'register'
